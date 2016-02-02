@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scambio.DataAccess", "Scamb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scambio.Localization", "Scambio.Localization\Scambio.Localization.csproj", "{8E79E832-B1C9-40AB-8583-FBA479A51EC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scambio.Logic", "Scambio.Logic\Scambio.Logic.csproj", "{E3621C61-9BFA-427F-A68D-4E9176CDE467}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8E79E832-B1C9-40AB-8583-FBA479A51EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E79E832-B1C9-40AB-8583-FBA479A51EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E79E832-B1C9-40AB-8583-FBA479A51EC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3621C61-9BFA-427F-A68D-4E9176CDE467}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3621C61-9BFA-427F-A68D-4E9176CDE467}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3621C61-9BFA-427F-A68D-4E9176CDE467}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3621C61-9BFA-427F-A68D-4E9176CDE467}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
