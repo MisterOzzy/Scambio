@@ -48,7 +48,7 @@ namespace Scambio.DataAccess.EntityFramework
 
         public T Get(Expression<Func<T, bool>> conditionExpression)
         {
-            return DbSet.Where(conditionExpression).FirstOrDefault();
+            return DbSet.FirstOrDefault(conditionExpression);
         }
 
         public IEnumerable<T> GetAll()

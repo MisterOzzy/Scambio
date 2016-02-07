@@ -1,4 +1,7 @@
-﻿using Scambio.DataAccess.Repositories;
+﻿using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using Scambio.DataAccess.Repositories;
 using Scambio.Domain.Models;
 
 namespace Scambio.DataAccess.EntityFramework.Repositories
@@ -7,6 +10,21 @@ namespace Scambio.DataAccess.EntityFramework.Repositories
     {
         public UserRepository(ScambioContext dbContext) : base(dbContext)
         {
+        }
+
+        public User FindByUserName(string username)
+        {
+            return DbSet.FirstOrDefault(x => x.UserName == username);
+        }
+
+        public Task<User> FindByUserNameAsync(string username)
+        {
+            return DbSet.FirstOrDefaultAsync(x => x.UserName == username);
+        }
+
+        public Task<User> FindByUserNameAsync(System.Threading.CancellationToken cancellationToken, string username)
+        {
+            return DbSet.FirstOrDefaultAsync(x => x.UserName == username, cancellationToken);
         }
     }
 }

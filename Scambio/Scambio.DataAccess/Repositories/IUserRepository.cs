@@ -11,6 +11,8 @@ namespace Scambio.DataAccess.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
-
+        User FindByUserName(string username);
+        Task<User> FindByUserNameAsync(string username);
+        Task<User> FindByUserNameAsync(System.Threading.CancellationToken cancellationToken, string username);
     }
 }

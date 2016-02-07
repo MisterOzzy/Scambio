@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Scambio.DataAccess.EntityFramework.Repositories;
 using Scambio.DataAccess.Infrastructure;
 using Scambio.DataAccess.Repositories;
@@ -42,6 +43,11 @@ namespace Scambio.DataAccess.EntityFramework
         public void Save()
         {
             _dbContext.SaveChanges();
+        }
+
+        public Task SaveAsync()
+        {
+            return _dbContext.SaveChangesAsync();
         }
 
         private void Dispose(bool disposing)

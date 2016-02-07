@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using Scambio.DataAccess.Repositories;
 
 namespace Scambio.DataAccess.Infrastructure
@@ -11,5 +12,6 @@ namespace Scambio.DataAccess.Infrastructure
         IPostRepository PostRepository { get; }
         IUserRepository UserRepository { get; }
         void Save();
+        Task SaveAsync();
     }
 }
