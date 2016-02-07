@@ -1,0 +1,19 @@
+@font-face {
+	font-family: "RobotoRegular";
+	src: url("RobotoRegular/RobotoRegular.eot");
+	src: url("RobotoRegular/RobotoRegular.eot?#iefix") format("embedded-opentype"),
+			 url("RobotoRegular/RobotoRegular.woff") format("woff"),
+			 url("RobotoRegular/RobotoRegular.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+
+@font-face {
+    font-family: "CalligraphMedium";
+    src: url("CalligraphMedium/CalligraphMedium.eot");
+    src: url("CalligraphMedium/CalligraphMedium.eot?#iefix")format("embedded-opentype"),
+    url("CalligraphMedium/CalligraphMedium.woff") format("woff"),
+    url("CalligraphMedium/CalligraphMedium.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
