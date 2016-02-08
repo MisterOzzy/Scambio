@@ -4,7 +4,7 @@
 @model Scambio.Web.ViewModels.RegisterViewModel
 
 <div class="main-sign-up">
-    @using (@Html.BeginForm("Register","Home",FormMethod.Post,new { @class="form-sign-up"}))
+    @using (@Html.BeginForm("Register", "Home", FormMethod.Post, new { @class = "form-sign-up" }))
     {
         @Html.AntiForgeryToken()
         <div class="panel panel-info">
@@ -22,6 +22,7 @@
                                 @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Username" })
                                 @*<input type="text" class="form-control" id="inputEmail" placeholder="First name">*@
                             </div>
+                            @Html.ValidationMessageFor(m => m.UserName, string.Empty, new { @class = "col-lg-9 col-lg-offset-3" })
                         </div>
 
                     </div>
@@ -32,6 +33,7 @@
                             <div class="col-lg-9">
                                 @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First name" })
                             </div>
+                            @Html.ValidationMessageFor(m => m.FirstName, string.Empty, new { @class = "col-lg-9 col-lg-offset-3" })
                         </div>
 
                     </div>
@@ -41,6 +43,7 @@
                             <div class="col-lg-9">
                                 @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last name" })
                             </div>
+                            @Html.ValidationMessageFor(m => m.LastName, string.Empty, new { @class = "col-lg-9 col-lg-offset-3" })
                         </div>
 
                     </div>
@@ -50,6 +53,7 @@
                             <div class="col-lg-9">
                                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
                             </div>
+                            @Html.ValidationMessageFor(m => m.Email, string.Empty, new { @class = "col-lg-9 col-lg-offset-3" })
                         </div>
 
                     </div>
@@ -57,42 +61,44 @@
                         <div class="form-group">
                             @Html.LabelFor(m => m.Password, new { @class = "col-lg-3 control-label" })
                             <div class="col-lg-9">
-                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
-
+                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", placeholder = "Password", type="password"})
                             </div>
+                            @Html.ValidationMessageFor(m => m.Password, string.Empty, new { @class = "col-lg-9 col-lg-offset-3" })
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group">
                             @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-lg-3 control-label" })
                             <div class="col-lg-9">
-                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Re-type password" })
-
+                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Re-type password", type = "password" })
                             </div>
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, string.Empty, new { @class = "col-lg-9 col-lg-offset-3" })
                         </div>
                     </div>
-                    @*<div class="row">
-                    <div class="form-group">
-                        <label for="inputPassword" class="col-lg-3 control-label">Birthday</label>
-                        <div class="col-lg-9">
-                            <input type="password" class="form-control" id="inputPassword" placeholder="Re-type password">
-
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Birthday, new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", placeholder = "dd/mm/yyyy" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Birthday, string.Empty, new { @class = "col-lg-9 col-lg-offset-3" })
                         </div>
                     </div>
-                </div>*@
 
                     <div class="row">
                         <div class="form-group">
                             <div class="col-lg-9 col-lg-offset-3">
-                                <input type="submit" class="btn btn-success" value="Register"/>
+                                <input type="submit" class="btn btn-success" value="Register" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        }
+    }
 
-
+    @section scripts
+    {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 </div>
-

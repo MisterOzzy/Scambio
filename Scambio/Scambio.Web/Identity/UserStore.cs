@@ -206,68 +206,22 @@ namespace Scambio.Web.Identity
         #region IUserRoleStore<IdentityUser, Guid> Members
         public Task AddToRoleAsync(IdentityUser user, string roleName)
         {
-            //////if (user == null)
-            //////    throw new ArgumentNullException("user");
-            //////if (string.IsNullOrWhiteSpace(roleName))
-            //////    throw new ArgumentException("Argument cannot be null, empty, or whitespace: roleName.");
-
-            //////var u = _unitOfWork.UserRepository.GetById(user.Id);
-            //////if (u == null)
-            //////    throw new ArgumentException("IdentityUser does not correspond to a User entity.", "user");
-            //////var r = _unitOfWork.RoleRepository.FindByName(roleName);
-            //////if (r == null)
-            //////    throw new ArgumentException("roleName does not correspond to a Role entity.", "roleName");
-
-            //////u.Roles.Add(r);
-            //////_unitOfWork.UserRepository.Update(u);
-
-            ////return _unitOfWork.SaveAsync();
             return Task.Run(() => { });
         }
 
         public Task<IList<string>> GetRolesAsync(IdentityUser user)
-        {
-            //////if (user == null)
-            //////    throw new ArgumentNullException("user");
-
-            //////var u = _unitOfWork.UserRepository.GetById(user.Id);
-            //////if (u == null)
-            //////    throw new ArgumentException("IdentityUser does not correspond to a User entity.", "user");
+        { 
             return Task.FromResult<IList<string>>(new List<string>(0));
-            //return Task.FromResult<IList<string>>(u.Roles.Select(x => x.Name).ToList());
         }
 
         public Task<bool> IsInRoleAsync(IdentityUser user, string roleName)
-        {
-            ////if (user == null)
-            ////    throw new ArgumentNullException("user");
-            ////if (string.IsNullOrWhiteSpace(roleName))
-            ////    throw new ArgumentException("Argument cannot be null, empty, or whitespace: role.");
-
-            ////var u = _unitOfWork.UserRepository.GetById(user.Id);
-            ////if (u == null)
-            ////    throw new ArgumentException("IdentityUser does not correspond to a User entity.", "user");
-            return Task.FromResult(false);
-            ////return Task.FromResult<bool>(u.Roles.Any(x => x.Name == roleName));
+        {  
+            return Task.FromResult(false); 
         }
 
         public Task RemoveFromRoleAsync(IdentityUser user, string roleName)
-        {
-            //////if (user == null)
-            //////    throw new ArgumentNullException("user");
-            //////if (string.IsNullOrWhiteSpace(roleName))
-            //////    throw new ArgumentException("Argument cannot be null, empty, or whitespace: role.");
-
-            //////var u = _unitOfWork.UserRepository.GetById(user.Id);
-            //////if (u == null)
-            //////    throw new ArgumentException("IdentityUser does not correspond to a User entity.", "user");
-
-            //////var r = u.Roles.FirstOrDefault(x => x.Name == roleName);
-            //////u.Roles.Remove(r);
-
-            //////_unitOfWork.UserRepository.Update(u);
+        {  
             return Task.Run(() => { });
-            //return _unitOfWork.SaveAsync();
         }
         #endregion
 

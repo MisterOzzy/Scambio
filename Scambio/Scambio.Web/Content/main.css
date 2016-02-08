@@ -15,14 +15,45 @@
 	opacity: 1;
 }
 
-body input:focus:required:invalid,
+.field-validation-error {
+    color: #f00;
+    margin-bottom: 5px !important;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+    margin-bottom: 0 !important;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-errors> ul 
+{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;    
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/*body input:focus:required:invalid,
 body textarea:focus:required:invalid {
 	
 }
 body input:required:valid,
 body textarea:required:valid {
 	
-}
+}*/
 
 body {
 	font-family: "RobotoRegular", arial, sans-serif;

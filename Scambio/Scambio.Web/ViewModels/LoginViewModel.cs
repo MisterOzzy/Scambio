@@ -9,11 +9,11 @@ namespace Scambio.Web.ViewModels
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Field is required")]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Field is required")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

@@ -9,7 +9,6 @@ namespace Scambio.DataAccess.EntityFramework.Configurations
         {
             Property(p => p.DateCreated).IsRequired().HasColumnType("datetime");
             Property(p => p.Body).IsOptional().HasColumnType("nvarchar");
-            Property(p => p.PictureId).IsOptional();
             HasMany(p => p.PostedUsers).WithMany(u => u.PostsOnWall).Map(m =>
             {
                 m.ToTable("Wall");
