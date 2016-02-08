@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Register";
+}
+@model Scambio.Web.ViewModels.RegisterViewModel
+
+<div class="main-sign-up">
+    @using (@Html.BeginForm("Register","Home",FormMethod.Post,new { @class="form-sign-up"}))
+    {
+        @Html.AntiForgeryToken()
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h2 class="panel-title">Register</h2>
+            </div>
+            <div class="panel-body">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="form-group">
+                            @*<label for="inputEmail" class="col-lg-3 control-label">Username</label>*@
+                            @Html.LabelFor(m => m.UserName, new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Username" })
+                                @*<input type="text" class="form-control" id="inputEmail" placeholder="First name">*@
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FirstName, new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First name" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.LastName, new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last name" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-lg-3 control-label" })
+                            <div class="col-lg-9">
+                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Re-type password" })
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="row">
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-lg-3 control-label">Birthday</label>
+                        <div class="col-lg-9">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Re-type password">
+
+                        </div>
+                    </div>
+                </div>*@
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-lg-9 col-lg-offset-3">
+                                <input type="submit" class="btn btn-success" value="Register"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+
+
+</div>
+

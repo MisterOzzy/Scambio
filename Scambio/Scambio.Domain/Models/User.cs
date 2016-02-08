@@ -7,6 +7,7 @@ namespace Scambio.Domain.Models
     {
         #region Fields
 
+        private ICollection<Post> _ownPosts; 
         private ICollection<Claim> _claims;
         private ICollection<ExternalLogin> _externalLogins;
         private ICollection<Post> _postsOnWall;
@@ -18,16 +19,23 @@ namespace Scambio.Domain.Models
 
         public Guid Id { get; set; }
         public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public DateTime? Birthday { get; set; }
-        public Guid? AvatarId { get; set; }
-        public Picture Avatar { get; set; }
+        public virtual Picture Avatar { get; set; }
         public virtual string PasswordHash { get; set; }
         public virtual string SecurityStamp { get; set; }
 
         #endregion
 
         #region Navigation Properties
+
+        public virtual ICollection<Post> OwnPosts
+        {
+            get { return _ownPosts ?? (_postsOnWall = new List<Post>()); }
+            set { _ownPosts = value; }
+        }
 
         public virtual ICollection<Post> PostsOnWall
         {

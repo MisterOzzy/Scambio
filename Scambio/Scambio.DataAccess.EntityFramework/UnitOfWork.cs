@@ -15,7 +15,7 @@ namespace Scambio.DataAccess.EntityFramework
         private ILikeRepository _likeRepository;
         private IPictureRepository _pictureRepository;
         private IPostRepository _postRepository;
-        private IUserRepository _userRepository;
+        private IUserRepository _userRepository;   
 
         public UnitOfWork(IDbFactory<ScambioContext> dbFactory)
         {

@@ -1,0 +1,126 @@
+*::-webkit-input-placeholder {
+	color: #666;
+	opacity: 1;
+}
+*:-moz-placeholder {
+	color: #666;
+	opacity: 1;
+}
+*::-moz-placeholder {
+	color: #666;
+	opacity: 1;
+}
+*:-ms-input-placeholder {
+	color: #666;
+	opacity: 1;
+}
+
+body input:focus:required:invalid,
+body textarea:focus:required:invalid {
+	
+}
+body input:required:valid,
+body textarea:required:valid {
+	
+}
+
+body {
+	font-family: "RobotoRegular", arial, sans-serif;
+	font-size: 16px;
+	position: relative;
+	line-height: 1.6;
+	overflow-x: hidden;
+	background-image: url(Assets/back_pattern.png);
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
+{
+		font-family: "RobotoRegular", arial, sans-serif;
+}
+
+.main-header
+{
+	margin: 0;
+	padding-top: 20px;
+	text-align: center;
+	font-family: "CalligraphMedium", arial, sans-serif;
+	background-color: #68EDBC;
+	font-size: 6.5em;
+
+}
+
+.main-sign-in, .main-sign-up
+{
+	margin: 100px auto;
+	padding: 0 20px;
+
+}
+
+.form-sign-in, .form-sign-up
+{
+	font-family: "RobotoRegular";
+	margin: auto;
+	max-width: 600px;
+}
+
+.form-sign-in>.panel-info,
+.form-sign-up>.panel-info
+{
+	border-color: rgb(104, 237, 188);
+}
+
+.form-sign-in>.panel-info .panel-heading,
+.form-sign-up>.panel-info .panel-heading
+{
+	background-color: rgba(104, 237, 188, 0.5);
+	border-bottom-width: 0;
+}
+.form-sign-in>.panel-info > .panel-heading
+{
+	color: #000;
+}
+
+.form-sign-in>.panel-info > .panel-heading > .panel-title,
+.form-sign-up>.panel-info > .panel-heading > .panel-title
+{
+	font-family: "RobotoRegular", arial, sans-serif;
+	font-size: 30px;
+	color: #000;
+}
+
+.form-sign-in>.fg-cont
+{
+	margin: 100px;
+	position: relative;
+
+}
+
+.form-sign-in>.fg-cont>a
+{
+	margin: 100px;
+}
+
+
+
+.form-sign-in label,
+.form-sign-in input,
+.form-sign-in button,
+.form-sign-up label,
+.form-sign-up input,
+.form-sign-up button
+{
+	margin-bottom: 10px;
+}
+
+.form-sign-up .col-lg-3
+{
+	padding-left: 10px;
+}
+
+.recovery-email-align
+{
+	padding-left: 60px!important;
+}
+
+
+

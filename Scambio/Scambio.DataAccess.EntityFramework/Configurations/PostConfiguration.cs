@@ -16,7 +16,7 @@ namespace Scambio.DataAccess.EntityFramework.Configurations
                 m.MapLeftKey("PostId");
                 m.MapRightKey("UserId");
             });
-            HasRequired(p => p.Author).WithMany().HasForeignKey(p => p.AuthorId);
+            HasRequired(p => p.Author).WithMany(u => u.OwnPosts).HasForeignKey(p => p.AuthorId).WillCascadeOnDelete(false);
             HasOptional(p => p.Picture).WithOptionalDependent();
         }
     }

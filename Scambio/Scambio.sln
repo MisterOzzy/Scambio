@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scambio.Logic", "Scambio.Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scambio.Web", "Scambio.Web\Scambio.Web.csproj", "{52ED820A-1AB2-4214-A13F-9BBE15AAEE22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scambio.Test", "Scambio.Test\Scambio.Test.csproj", "{C4AF93A4-9E9C-42E0-995D-E4CC37C49887}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{52ED820A-1AB2-4214-A13F-9BBE15AAEE22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52ED820A-1AB2-4214-A13F-9BBE15AAEE22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52ED820A-1AB2-4214-A13F-9BBE15AAEE22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4AF93A4-9E9C-42E0-995D-E4CC37C49887}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4AF93A4-9E9C-42E0-995D-E4CC37C49887}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4AF93A4-9E9C-42E0-995D-E4CC37C49887}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4AF93A4-9E9C-42E0-995D-E4CC37C49887}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

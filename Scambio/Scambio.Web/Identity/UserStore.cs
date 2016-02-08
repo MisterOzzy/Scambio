@@ -9,7 +9,7 @@ using DomainModels = Scambio.Domain.Models;
 
 namespace Scambio.Web.Identity
 {
-    internal class UserStore : IUserLoginStore<IdentityUser, Guid>, IUserClaimStore<IdentityUser, Guid>,
+    public class UserStore : IUserLoginStore<IdentityUser, Guid>, IUserClaimStore<IdentityUser, Guid>,
         IUserRoleStore<IdentityUser, Guid>, IUserPasswordStore<IdentityUser, Guid>,
         IUserSecurityStampStore<IdentityUser, Guid>, IUserStore<IdentityUser, Guid>, IDisposable
     {
@@ -206,22 +206,68 @@ namespace Scambio.Web.Identity
         #region IUserRoleStore<IdentityUser, Guid> Members
         public Task AddToRoleAsync(IdentityUser user, string roleName)
         {
-            throw new NotImplementedException();
+            //////if (user == null)
+            //////    throw new ArgumentNullException("user");
+            //////if (string.IsNullOrWhiteSpace(roleName))
+            //////    throw new ArgumentException("Argument cannot be null, empty, or whitespace: roleName.");
+
+            //////var u = _unitOfWork.UserRepository.GetById(user.Id);
+            //////if (u == null)
+            //////    throw new ArgumentException("IdentityUser does not correspond to a User entity.", "user");
+            //////var r = _unitOfWork.RoleRepository.FindByName(roleName);
+            //////if (r == null)
+            //////    throw new ArgumentException("roleName does not correspond to a Role entity.", "roleName");
+
+            //////u.Roles.Add(r);
+            //////_unitOfWork.UserRepository.Update(u);
+
+            ////return _unitOfWork.SaveAsync();
+            return Task.Run(() => { });
         }
 
         public Task<IList<string>> GetRolesAsync(IdentityUser user)
         {
-            throw new NotImplementedException();
+            //////if (user == null)
+            //////    throw new ArgumentNullException("user");
+
+            //////var u = _unitOfWork.UserRepository.GetById(user.Id);
+            //////if (u == null)
+            //////    throw new ArgumentException("IdentityUser does not correspond to a User entity.", "user");
+            return Task.FromResult<IList<string>>(new List<string>(0));
+            //return Task.FromResult<IList<string>>(u.Roles.Select(x => x.Name).ToList());
         }
 
         public Task<bool> IsInRoleAsync(IdentityUser user, string roleName)
         {
-            throw new NotImplementedException();
+            ////if (user == null)
+            ////    throw new ArgumentNullException("user");
+            ////if (string.IsNullOrWhiteSpace(roleName))
+            ////    throw new ArgumentException("Argument cannot be null, empty, or whitespace: role.");
+
+            ////var u = _unitOfWork.UserRepository.GetById(user.Id);
+            ////if (u == null)
+            ////    throw new ArgumentException("IdentityUser does not correspond to a User entity.", "user");
+            return Task.FromResult(false);
+            ////return Task.FromResult<bool>(u.Roles.Any(x => x.Name == roleName));
         }
 
         public Task RemoveFromRoleAsync(IdentityUser user, string roleName)
         {
-            throw new NotImplementedException();
+            //////if (user == null)
+            //////    throw new ArgumentNullException("user");
+            //////if (string.IsNullOrWhiteSpace(roleName))
+            //////    throw new ArgumentException("Argument cannot be null, empty, or whitespace: role.");
+
+            //////var u = _unitOfWork.UserRepository.GetById(user.Id);
+            //////if (u == null)
+            //////    throw new ArgumentException("IdentityUser does not correspond to a User entity.", "user");
+
+            //////var r = u.Roles.FirstOrDefault(x => x.Name == roleName);
+            //////u.Roles.Remove(r);
+
+            //////_unitOfWork.UserRepository.Update(u);
+            return Task.Run(() => { });
+            //return _unitOfWork.SaveAsync();
         }
         #endregion
 
@@ -280,6 +326,9 @@ namespace Scambio.Web.Identity
             user.UserName = identityUser.UserName;
             user.PasswordHash = identityUser.PasswordHash;
             user.SecurityStamp = identityUser.SecurityStamp;
+            user.Email = identityUser.Email;
+            user.FirstName = identityUser.FirstName;
+            user.LastName = identityUser.LastName;
         }
 
         private IdentityUser getIdentityUser(DomainModels.User user)
@@ -299,6 +348,9 @@ namespace Scambio.Web.Identity
             identityUser.UserName = user.UserName;
             identityUser.PasswordHash = user.PasswordHash;
             identityUser.SecurityStamp = user.SecurityStamp;
+            identityUser.Email = user.Email;
+            identityUser.FirstName = user.FirstName;
+            identityUser.LastName = user.LastName;
         }
         #endregion
     }

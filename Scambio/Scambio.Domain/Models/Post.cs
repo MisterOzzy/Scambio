@@ -12,7 +12,7 @@ namespace Scambio.Domain.Models
         public User Author { get; set; }
         public DateTime DateCreated { get; set; }
         public Guid? PictureId { get; set; }
-        public Picture Picture { get; set; }
+        public virtual Picture Picture { get; set; }
         public string Body { get; set; }
 
         public virtual ICollection<Like> Likes

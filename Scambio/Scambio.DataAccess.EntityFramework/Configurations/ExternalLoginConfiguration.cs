@@ -7,6 +7,8 @@ namespace Scambio.DataAccess.EntityFramework.Configurations
     {
         public ExternalLoginConfiguration()
         {
+            HasKey(x => new { x.LoginProvider, x.ProviderKey, x.UserId });
+
             Property(x => x.LoginProvider)
                 .HasColumnType("nvarchar")
                 .HasMaxLength(128)
