@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Scambio.Domain.Models;
 
 namespace Scambio.Logic.Interfaces
 {
@@ -10,8 +12,8 @@ namespace Scambio.Logic.Interfaces
     {
         UserInfo GetUser(string id);
         UserInfo GetUser(Guid id);
-        void AddPost(Guid authorId, Guid wallOwnerId, string bodyPost);
-        void AddPostWithPicture(Guid authorId, Guid wallOwnerId, string bodyPost, string pathToStorage);
+        void AddPost(Guid authorId, Guid wallOwnerId, string bodyPost, Picture picture = null);
+        void AddPostWithPicture(Guid authorId, Guid wallOwnerId, string bodyPost, string pathToStorage, Stream inputStream, string pictureExtension);
 
     }
 }

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Scambio.Domain.Models.Post>
+
+@foreach (var post in Model)
+{
+    <div class="post">
+        <div class="author-info">
+            <img src="~/Content/Assets/avatar.png" alt="ava" class="img-circle">
+            <div class="author-post">@post.Author.FirstName @post.Author.LastName</div>
+            <div class="btn-delete-post">
+                <button type="button" class="close">×</button>
+            </div>
+        </div>
+
+
+        <div class="post-container">
+            <div class="text-area">
+                <div>
+                    @*Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem qui, laboriosam minus necessitatibus fugit reprehenderit ratione accusamus rem! Odit, nesciunt, maiores laborum accusantium harum pariatur earum cupiditate. Sequi, magni veritatis.
+                    Ratione omnis facere expedita odio, sequi doloribus architecto, esse explicabo, aliquid obcaecati qui, nemo neque dolores? Sequi distinctio eius consectetur tempore molestiae quos delectus natus commodi rem. Autem, consectetur, enim.
+                    Aperiam voluptatum, aspernatur, id incidunt quae voluptate inventore. Minus velit doloremque maiores aliquam id tempore est, cum fugit cumque impedit ex, natus nesciunt harum, doloribus sunt consectetur earum repellendus assumenda.*@
+
+                    @post.Body
+                </div>
+            </div>
+            @if (post.Picture != null)
+            {
+                <div class="photo-container">
+                    <div class="photo-area">
+                        <img src="" alt="Picture">
+                    </div>
+                </div>
+            }
+            
+        </div>
+
+
+        <div class="date-like-info">
+            <div class="date-info">@post.DateCreated.ToString()</div>
+            <div class="like-container">
+                <div class="look-like">Look</div>
+                <div class="like-count">@post.Likes.Count</div>
+                <div class="btn-like-wrapper">
+                    <button class="btn btn-default btn-like clearfix" type="button">
+                        <i class="glyphicon glyphicon-heart"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}

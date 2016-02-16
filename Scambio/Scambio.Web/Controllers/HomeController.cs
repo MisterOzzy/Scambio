@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.UI;
 using Microsoft.AspNet.Identity;
@@ -52,7 +54,23 @@ namespace Scambio.Web.Controllers
         [HttpPost]
         public ActionResult AddPost(string bodyPost, HttpPostedFileBase picturePost)
         {
-            _userService.AddPost(new Guid(HttpContext.User.Identity.GetUserId()) , new Guid(HttpContext.User.Identity.GetUserId()), bodyPost);
+            
+            if (picturePost != null)
+            {
+                var pictureFolderStorage = ConfigurationManager.AppSettings["pictureStorage"];
+                var pathToStorage = HostingEnvironment.MapPath($"~/{pictureFolderStorage}");
+
+                var tmp = picturePost.FileName.Split('.');
+                var extension = tmp[tmp.Length - 1];
+
+                _userService.AddPostWithPicture(new Guid(HttpContext.User.Identity.GetUserId()),
+                    new Guid(HttpContext.User.Identity.GetUserId()), bodyPost, pathToStorage,
+                    picturePost.InputStream, extension);
+            }
+                
+            else
+                _userService.AddPost(new Guid(HttpContext.User.Identity.GetUserId()) , new Guid(HttpContext.User.Identity.GetUserId()), bodyPost);
+
             return RedirectToAction("UserPage", new {username = HttpContext.User.Identity.GetUserName()});
         }
     }
