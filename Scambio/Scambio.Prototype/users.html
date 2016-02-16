@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ivan Ivanov</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	<link type="text/css" rel="stylesheet" href="main.css"/>
+	<link type="text/css" rel="stylesheet" href="media.css"/>
+	<link type="text/css" rel="stylesheet" href="fonts.css"/>
+	
+</head>
+<body>
+	<header class="main-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">Scambio</div>
+			</div>
+		</div>
+	</header>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">
+					<img src="avatar.png" alt="ava" class="img-rounded">
+				</a>
+			</div>
+
+
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="initial">Panda Pandovich</li>	
+					<li>
+						<form class="navbar-form navbar-left">
+							<div class="form-group">
+								<div class="input-group">
+									<input type="text" class="form-control nav-search-size navbar-search-users-tb" placeholder="Search other users...">
+									<span class="input-group-btn">
+										<button class="btn btn-default navbar-search-users" type="button"><i class="glyphicon glyphicon-search"></i></button>
+									</span>
+								</div>
+							</div>
+						</form>
+					</li>
+				</ul>
+				
+				
+
+
+				<ul class="nav navbar-nav navbar-right nav-bar-right-panel">
+					<li><button class="btn btn-default" type="button">Settings</button></li>
+					<li><button type="submit" class="btn btn-default">Sign Out</button></li>
+
+				</ul>
+
+
+			</div>
+		</div>
+	</nav>
+	<div class="main-container find-container-mxw">
+		<div class="find-container">
+			<div class="user">
+				<div class="user-avatar">
+					<img src="avatar.png" alt="" class="img-rounded">
+				</div>
+				<div class="user-initial"><a href="#">Petro Petrov</a></div>
+			</div>
+			<div class="user">
+				<div class="user-avatar">
+					<img src="avatar.png" alt="" class="img-rounded">
+				</div>
+				<div class="user-initial"><a href="#">Petro Petrov</a></div>
+			</div>
+			<div class="user">
+				<div class="user-avatar">
+					<img src="avatar.png" alt="" class="img-rounded">
+				</div>
+				<div class="user-initial"><a href="#">Petro Petrov</a></div>
+			</div>
+			<div class="user">
+				<div class="user-avatar">
+					<img src="avatar.png" alt="" class="img-rounded">
+				</div>
+				<div class="user-initial"><a href="#">Petro Petrov</a></div>
+			</div>
+			<div class="user">
+				<div class="user-avatar">
+					<img src="avatar.png" alt="" class="img-rounded">
+				</div>
+				<div class="user-initial"><a href="#">Petro Petrov</a></div>
+			</div>
+			<div class="user">
+				<div class="user-avatar">
+					<img src="avatar.png" alt="" class="img-rounded">
+				</div>
+				<div class="user-initial"><a href="#">Petro Petrov</a></div>
+			</div>
+			<div class="user">
+				<div class="user-avatar">
+					<img src="avatar.png" alt="" class="img-rounded">
+				</div>
+				<div class="user-initial"><a href="#">Petro Petrov</a></div>
+			</div>
+			<div class="user">
+				<div class="user-avatar">
+					<img src="avatar.png" alt="" class="img-rounded">
+				</div>
+				<div class="user-initial"><a href="#">Petro Petrov</a></div>
+			</div>
+			<div class="user">
+				<div class="user-avatar">
+					<img src="avatar.png" alt="" class="img-rounded">
+				</div>
+				<div class="user-initial"><a href="#">Petro Petrov</a></div>
+			</div>
+			<div class="user">
+				<div class="user-avatar">
+					<img src="avatar.png" alt="" class="img-rounded">
+				</div>
+				<div class="user-initial"><a href="#">Petro Petrov</a></div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+	<script src="jquery-1.10.2.min.js"></script>
+	<script src="bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function () {
+
+			var menu = $('.navbar');
+			var origOffsetY = menu.offset().top;
+			
+
+			function scroll() {
+				if ($(window).scrollTop() >= origOffsetY) {
+					$('.navbar').addClass('sticky');
+					$('.main-container').addClass('navbar-padding');
+				} else {
+					$('.navbar').removeClass('sticky');
+					$('.main-container').removeClass('navbar-padding');
+				}
+
+
+			}
+
+			document.onscroll = scroll;
+
+		});
+	</script>
+
+</body>
+</html>

@@ -55,6 +55,32 @@ body textarea:required:valid {
 	
 }*/
 
+/**::-webkit-input-placeholder {
+	color: #666;
+	opacity: 1;
+}
+*:-moz-placeholder {
+	color: #666;
+	opacity: 1;
+}
+*::-moz-placeholder {
+	color: #666;
+	opacity: 1;
+}
+*:-ms-input-placeholder {
+	color: #666;
+	opacity: 1;
+}
+
+body input:focus:required:invalid,
+body textarea:focus:required:invalid {
+	
+}
+body input:required:valid,
+body textarea:required:valid {
+	
+}*/
+
 body {
 	font-family: "RobotoRegular", arial, sans-serif;
 	font-size: 16px;
@@ -66,7 +92,7 @@ body {
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 {
-		font-family: "RobotoRegular", arial, sans-serif;
+	font-family: "RobotoRegular", arial, sans-serif;
 }
 
 .main-header
@@ -80,7 +106,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 
 }
 
-.main-sign-in, .main-sign-up
+.main-sign-in, .main-sign-up, .main-settings
 {
 	margin: 100px auto;
 	padding: 0 20px;
@@ -153,5 +179,297 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 	padding-left: 60px!important;
 }
 
+.navbar-brand > .img-rounded
+{
+	width: 100px;
+}
+
+.navbar-brand 
+{
+	padding: 5px;
+}
+
+.initial
+{
+	font-size: 40px;
+	padding-top: 20px;
+	padding-left: 15px; 
+}
+
+.navbar .navbar-form {
+	position: relative;
+	padding-top: 30px;
+	margin-left: 15px;
+	width: 240px;
+}
+
+.nav-bar-right-panel
+{
+	padding-top: 38px;
+	padding-right: 15px;
+}
+
+.nav-bar-right-panel>li
+{
+	margin-right: 5px;
+}
+
+.navbar-search-users-tb,
+.navbar-search-users
+{
+	margin-left: -15px;
+}
+
+.navbar-search-users-tb:focus
+{
+	border-color: #BABABA;
+	box-shadow: none;
+}
+
+.btn
+{
+	padding: 6px 12px;
+
+}
+
+.btn:focus
+{
+	outline: none;
+}
+
+.main-container
+{
+	text-align: center;
+	margin: 15px auto;
+	width: 60%;
+	max-width: 900px;
+}
+
+.find-container,
+.wall
+{
+	width: 100%;
+	background-color: rgba(255,255,255,0.4);
+	padding: 10px 15px 10px 15px;
+}
+
+.find-container
+{
+	text-align: left;
+}
+
+.sticky {
+	position:fixed;
+	top:0;
+}
+
+.navbar
+{
+	width: 100%;
+
+}
+
+.navbar-padding {
+	padding-top:140px;
+}
+
+.btn-add-picture
+{
+
+	height: 34px;
+	padding: 2px 5px 2px 5px;
+	border-radius: 0;
+}
+
+.btn-add-picture>.glyphicon
+{
+	font-size: 24px;
+	margin: 0;
+	padding: 0;
+	line-height: 1.005;
+}
+
+.post
+{
+	text-align: left;
+	margin-top: 25px;
+	border: 1px solid #BABABA;
+}
+
+.author-info
+{
+	background-color: #e1e1e1;
+
+}
+
+.author-info > .img-circle
+{
+	margin: 5px;
+	width: 40px;
+}
+
+.author-post
+{
+	display: inline-block;
+	padding-top: 12px;
+}
+
+.btn-delete-post
+{
+	display: inline-block;
+	float: right;
+	position: relative;
+	padding: 12px 15px 0px 0px;
+}
+
+.text-area
+{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.photo-container
+{
+	text-align: center;
+}
+
+.photo-area
+{
+	width: 100%;
+	margin-top:15px;
+	text-align: center;
+}
+
+.photo-container>.photo-area::before
+{
+	content:''; 
+	height: 100%;
+	display: inline-block; 
+}
+
+
+.photo-area>img
+{
+	width: auto;
+	height: auto;
+	max-width: 700px;
+	max-height: 400px;
+	overflow: hidden;
+	display: inline-block;
+}
+
+.photo-area::before, 
+.photo-area>img
+{
+	vertical-align: middle;
+}
+
+.date-like-info
+{
+	padding: 5px 0 5px 10px;
+	background-color: #eaeaea;
+	margin-top: 15px;
+	border-top: 1px solid #BABABA;
+}
+
+.date-info
+{
+	display: inline-block;
+}
+
+.like-container
+{
+	display: inline-block;
+	float: right;
+}
+
+.like-container > *
+{
+	display: inline-block;
+}
+
+.btn-like-wrapper
+{
+	position: relative;
+}
+
+.btn-like
+{
+	float: none;
+	padding: 4px 15px 6px 6px;
+	border: none;
+	background-color: transparent;
+}
+
+.btn-like-wrapper>.btn-default
+{
+	background-color: none;
+	box-shadow: none;
+}
+
+.btn-like-wrapper>.btn:hover
+{
+	color: #000;
+}
+
+/*.col-centered{
+float: none;
+margin: 0 auto;
+}*/
+
+.col-centered{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+
+.user
+{
+	margin-bottom: 15px;
+}
+
+.user-initial > a:focus
+{
+	outline: none;
+}
+
+.user > *
+{
+	display: inline-block;
+}
+
+.user-avatar > img
+{
+	margin-right: 15px;
+	width: 100px;
+}
+
+
+.find-container-mxw
+{
+	max-width: 600px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
 
 

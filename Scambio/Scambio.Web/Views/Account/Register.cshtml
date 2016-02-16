@@ -4,7 +4,7 @@
 @model Scambio.Web.ViewModels.RegisterViewModel
 
 <div class="main-sign-up">
-    @using (@Html.BeginForm("Register", "Home", FormMethod.Post, new { @class = "form-sign-up" }))
+    @using (@Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-sign-up" }))
     {
         @Html.AntiForgeryToken()
         <div class="panel panel-info">

@@ -33,7 +33,7 @@ namespace Scambio.Domain.Models
 
         public virtual ICollection<Post> OwnPosts
         {
-            get { return _ownPosts ?? (_postsOnWall = new List<Post>()); }
+            get { return _ownPosts ?? (_ownPosts = new List<Post>()); }
             set { _ownPosts = value; }
         }
 

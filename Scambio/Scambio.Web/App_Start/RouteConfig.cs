@@ -12,6 +12,12 @@ namespace Scambio.Web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapMvcAttributeRoutes();
+            routes.MapRoute(
+                name: "UserHome",
+                url: "{username}",
+                defaults: new {controller = "Home", action = "UserPage" }
+                );
 
             routes.MapRoute(
                 name: "Default",

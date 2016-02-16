@@ -190,6 +190,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -200,6 +201,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\UploadPostViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Assets\back_pattern.png" />
@@ -242,6 +244,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Content\Assets\avatar.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -253,13 +256,17 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Account\About.cshtml" />
+    <Content Include="Views\Account\Contact.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\UserPage.cshtml" />
+    <Content Include="Views\Shared\_SignedLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Users_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -278,6 +285,10 @@
     <ProjectReference Include="..\Scambio.Domain\Scambio.Domain.csproj">
       <Project>{F70025F0-19E8-48B3-B65E-59A3A3B962D4}</Project>
       <Name>Scambio.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Scambio.Logic\Scambio.Logic.csproj">
+      <Project>{E3621C61-9BFA-427F-A68D-4E9176CDE467}</Project>
+      <Name>Scambio.Logic</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

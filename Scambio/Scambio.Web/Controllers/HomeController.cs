@@ -1,134 +1,59 @@
 ﻿using System;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using Microsoft.AspNet.Identity;
+using Scambio.DataAccess.Infrastructure;
+using Scambio.Logic;
+using Scambio.Logic.Interfaces;
 using Scambio.Web.Identity;
-using Scambio.Web.ViewModels;
 
 namespace Scambio.Web.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly UserManager<IdentityUser, Guid> _userManager;
-
-        public HomeController(IUserStore<IdentityUser, Guid> userStore)
+        private readonly IUserService _userService;
+        public HomeController(IUnitOfWork unitOfWork)
         {
-            _userManager = new UserManager<IdentityUser, Guid>(userStore);
+            _userService = new UserService(unitOfWork);
         }
 
-        private IAuthenticationManager AuthenticationManager
+        // GET: Home
+        public ActionResult Index()
         {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
+            //return RedirectToRoute("UserHome", HttpContext.User.Identity.GetUserName());
+            return RedirectToAction("UserPage", new { username = HttpContext.User.Identity.GetUserName()});
+            //if (HttpContext.User.Identity.IsAuthenticated)
+            //{
+            //    return null;
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Login", "Account");
+
+            //}
+            //return HttpContext.User.Identity.GetUserId();
+
+            //return RedirectToAction("Login", "Account");
         }
 
-        private async Task SignInAsync(IdentityUser user, bool isPersistent)
+        //[Route("{username}")]
+        public ActionResult UserPage(string username)
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            //VISNEET
-            var identity = await _userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
-        }
-
-        private ActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Signed", "Home");
-            }
-        }
-
-        public string Signed()
-        {
-            return "Signed";
-        }
-
-        [AllowAnonymous]
-        public ActionResult Index(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
+            var userId = HttpContext.User.Identity.GetUserId();
+            UserInfo userInfo = _userService.GetUser(userId);
+            ViewBag.User = userInfo;
             return View();
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(LoginViewModel model, string returnUrl)
+        public ActionResult AddPost(string bodyPost, HttpPostedFileBase picturePost)
         {
-            if (ModelState.IsValid)
-            {
-                
-                var user = await _userManager.FindAsync(model.UserName, model.Password);
-                if (user != null)
-                {
-                    await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Invalid username or password.");
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new IdentityUser() { UserName = model.UserName, FirstName = model.FirstName, LastName = model.LastName, Email = model.Email};
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Signed", "Home");
-                }
-                //else
-                //{
-                //    AddErrors(result);
-                //}
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            _userService.AddPost(new Guid(HttpContext.User.Identity.GetUserId()) , new Guid(HttpContext.User.Identity.GetUserId()), bodyPost);
+            return RedirectToAction("UserPage", new {username = HttpContext.User.Identity.GetUserName()});
         }
     }
 }

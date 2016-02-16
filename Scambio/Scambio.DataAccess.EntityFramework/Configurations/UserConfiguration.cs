@@ -38,6 +38,7 @@ namespace Scambio.DataAccess.EntityFramework.Configurations
                 .HasForeignKey(e => e.UserId);
 
             Property(u => u.Email).IsRequired().HasColumnType("nvarchar");
+
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Scambio.Web.Identity
             : this()
         {
             this.UserName = userName;
+            
         }
 
         public Guid Id { get; set; }
@@ -21,6 +22,7 @@ namespace Scambio.Web.Identity
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public DateTime? Birthday { get; set; }
         public virtual string PasswordHash { get; set; }
         public virtual string SecurityStamp { get; set; }
     }

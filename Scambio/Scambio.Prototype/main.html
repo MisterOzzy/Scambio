@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>Ivan Ivanov</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
 	<link type="text/css" rel="stylesheet" href="main.css"/>
 	<link type="text/css" rel="stylesheet" href="media.css"/>
 	<link type="text/css" rel="stylesheet" href="fonts.css"/>
-	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	
 </head>
 <body>
 	<header class="main-header">
@@ -17,45 +18,156 @@
 		</div>
 	</header>
 	<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Brand</a>
-		</div>
+		<div class="container-fluid">
 
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-				<li><a href="#">Link</a></li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">Action</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
-						<li class="divider"></li>
-						<li><a href="#">Separated link</a></li>
-						<li class="divider"></li>
-						<li><a href="#">One more separated link</a></li>
-					</ul>
-				</li>
-			</ul>
-			<form class="navbar-form navbar-left" role="search">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search">
-				</div>
-				<button type="submit" class="btn btn-default">Submit</button>
-			</form>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Link</a></li>
-			</ul>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">
+					<img src="avatar.png" alt="ava" class="img-rounded">
+				</a>
+			</div>
+
+
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="initial">Panda Pandovich</li>	
+					<li>
+						<form class="navbar-form navbar-left">
+							<div class="form-group">
+								<div class="input-group">
+									<input type="text" class="form-control nav-search-size navbar-search-users-tb" placeholder="Search other users...">
+									<span class="input-group-btn">
+										<button class="btn btn-default navbar-search-users" type="button"><i class="glyphicon glyphicon-search"></i></button>
+									</span>
+								</div>
+							</div>
+						</form>
+					</li>
+				</ul>
+				
+				
+
+
+				<ul class="nav navbar-nav navbar-right nav-bar-right-panel">
+					<li><button class="btn btn-default" type="button">Settings</button></li>
+					<li><button type="submit" class="btn btn-default">Sign Out</button></li>
+
+				</ul>
+
+
+			</div>
 		</div>
-	</div>
-</nav>
-</body>
-</html>
+	</nav>
+	<div class="main-container">
+		<div class="wall">
+			<div class="add-post">
+				<div class="form-group">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Enter text here...">
+						<span class="input-group-btn">
+
+								<!-- <button class="btn btn-default btn-add-picture" type="button">
+									<i class="glyphicon glyphicon-picture"></i>
+								</button> -->
+								<span class="btn btn-default btn-add-picture btn-file">
+									<i class="glyphicon glyphicon-picture"></i> 
+									<input type="file">
+								</span>
+
+
+
+
+							</span>
+							<span class="input-group-btn ">
+								<button class="btn btn-default send-msg-btn " type="button">Send</button>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="post">
+					<div class="author-info">
+						<img src="avatar.png" alt="ava" class="img-circle">
+						<div class="author-post">Panda Pandovich</div>
+						<div class="btn-delete-post">
+							<button type="button" class="close">×</button>
+						</div>
+					</div>
+
+
+					<div class="post-container">
+						<div class="text-area">
+							<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem qui, laboriosam minus necessitatibus fugit reprehenderit ratione accusamus rem! Odit, nesciunt, maiores laborum accusantium harum pariatur earum cupiditate. Sequi, magni veritatis.
+								Ratione omnis facere expedita odio, sequi doloribus architecto, esse explicabo, aliquid obcaecati qui, nemo neque dolores? Sequi distinctio eius consectetur tempore molestiae quos delectus natus commodi rem. Autem, consectetur, enim.
+								Aperiam voluptatum, aspernatur, id incidunt quae voluptate inventore. Minus velit doloremque maiores aliquam id tempore est, cum fugit cumque impedit ex, natus nesciunt harum, doloribus sunt consectetur earum repellendus assumenda.</div>
+							</div>
+							<div class="photo-container">
+								<div class="photo-area">
+									<img src="test4.jpg" alt="">
+								</div>
+							</div>
+						</div>
+
+
+						<div class="date-like-info">
+							<div class="date-info">10:34  26 Feb 2017</div>
+							<div class="like-container">
+								<div class="look-like">Look</div>
+								<div class="like-count">123</div>
+								<div class="btn-like-wrapper">
+									<button class="btn btn-default btn-like clearfix" type="button">
+										<i class="glyphicon glyphicon-heart"></i>
+									</button>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+
+
+
+
+
+
+
+				</div>
+			</div>
+
+
+
+
+
+
+			<script src="jquery-1.10.2.min.js"></script>
+			<script src="bootstrap.min.js"></script>
+			<script>
+				$(document).ready(function () {
+
+					var menu = $('.navbar');
+					var origOffsetY = menu.offset().top;
+
+					function scroll() {
+						if ($(window).scrollTop() >= origOffsetY) {
+							$('.navbar').addClass('sticky');
+							$('.main-container').addClass('navbar-padding');
+						} else {
+							$('.navbar').removeClass('sticky');
+							$('.main-container').removeClass('navbar-padding');
+						}
+
+
+					}
+
+					document.onscroll = scroll;
+
+				});
+			</script>
+
+		</body>
+		</html>
