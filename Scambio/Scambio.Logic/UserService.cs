@@ -29,6 +29,7 @@ namespace Scambio.Logic
             User user = _unitOfWork.UserRepository.GetById(id);
             var userInfo = new UserInfo()
             {
+                Id = user.Id,
                 Username = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.LastName,

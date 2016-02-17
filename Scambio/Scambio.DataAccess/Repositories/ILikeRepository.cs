@@ -10,5 +10,7 @@ namespace Scambio.DataAccess.Repositories
 {
     public interface ILikeRepository : IRepository<Like>
     {
+        int LikeCount(Guid postId);
+        Like ContainLikeFromUser(Guid userId, Guid postId);
     }
 }

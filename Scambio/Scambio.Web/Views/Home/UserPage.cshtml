@@ -7,11 +7,12 @@
     //    Url = Url.Action("PostsOnWall")
 
     //};
+    @model Scambio.Logic.UserInfo
 }
 
 
 <div class="main-container">
-    <div class="wall">
+    <div class="wall" id="@Model.Id">
        
         <div class="add-post">
             <div class="form-group">
@@ -45,45 +46,129 @@
 @section scripts
 {
     <script>
-    $(document).ready(function () {
-        $("#btnSend").click(function () {
-            var formData = new FormData();
-            formData.append("bodyPost", $("#tbBodyPost").val());
-            var files = document.getElementById("PictureUpload").files;
+        
+        function bindBtnLike() {
+            $(".btn-like").click(function () {
+                var postId = $(this).parent().parent().parent().parent().attr('id');
 
-            if (files.length != 0)
-                formData.append("PictureUpload", files[0]);
+                var formData = new FormData();
+                formData.append("postId", postId);
+                var thisBtn = $(this);
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("LikePost")',
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        thisBtn.parent().parent().find(".like-count").html(data);
+                    },
 
-            //for (var i = 0; i < totalFiles; i++)
-            //{
-            //    var file = document.getElementById("FileUpload").files[i];
 
-            //    formData.append("FileUpload", file);
-            //}
-            //e.preventDefault();
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("AddPost")',
-                data: formData,
-                dataType: 'html',
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    //Fill div with results
-                    if (data.val() != '') {
-                        $("#postdata").html(data);
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
                     }
-                    
-                    $("#tbBodyPost").val('');
-                    $("#PictureUpload").val('');
-                },
-                error: function (xhr, status, error) {
-                    alert(xhr.responseText);
-                }
+                });
+
             });
+        }
+
+        function bindBtnDelete() {
+            $(".btn-delete-post-id").click(function () {
+                var postId = $(this).parent().parent().parent().attr('id');
+                var authorId = $(this).parent().parent().find(".author-post").attr('id');
+                var wallId = $(".wall").attr('id');
+                var formData = new FormData();
+                formData.append("postId", postId);
+                formData.append("authorId", authorId);
+                formData.append("wallId", wallId);
+                var thisBtn = $(this);
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("DeletePost")',
+                    data: formData,
+                    dataType: 'html',
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        thisBtn.parent().parent().parent().remove();
+                    },
+
+
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                    }
+                });
+
+            });
+        }
+
+        $(document).ready(function () {
+            bindBtnDelete();
+            bindBtnLike();
+
+            $("#btnSend").click(function() {
+                var formData = new FormData();
+                formData.append("bodyPost", $("#tbBodyPost").val());
+                var files = document.getElementById("PictureUpload").files;
+
+                if (files.length != 0)
+                    formData.append("PictureUpload", files[0]);
+
+                //for (var i = 0; i < totalFiles; i++)
+                //{
+                //    var file = document.getElementById("FileUpload").files[i];
+
+                //    formData.append("FileUpload", file);
+                //}
+                //e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("AddPost")',
+                    data: formData,
+                    dataType: 'html',
+                    contentType: false,
+                    processData: false,
+                    success: function(data) {
+                        //Fill div with results
+                        if (data !== "") {
+                            $("#postdata").html(data);
+
+                            $("#tbBodyPost").val('');
+                            $("#PictureUpload").val('');
+                            bindBtnDelete();
+                            bindBtnLike();
+                        }
+
+
+                    },
+                    error: function(xhr, status, error) {
+                        alert(xhr.responseText);
+                    }
+                });
+            });
+
+
+            
+
+
         });
-    });
-</script>
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+        });
+
+    </script>
 }
 
 

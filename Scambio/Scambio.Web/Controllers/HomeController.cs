@@ -20,10 +20,12 @@ namespace Scambio.Web.Controllers
     {
         private readonly IUserService _userService;
         private readonly IPictureService _pictureService;
+        private readonly IPostService _postService;
         public HomeController(IUnitOfWork unitOfWork)
         {
             _pictureService = new PictureService(unitOfWork);
             _userService = new UserService(unitOfWork, _pictureService);
+            _postService = new PostService(unitOfWork);
         }
 
         // GET: Home
@@ -51,7 +53,7 @@ namespace Scambio.Web.Controllers
             var userId = HttpContext.User.Identity.GetUserId();
             UserInfo userInfo = _userService.GetUser(userId);
             ViewBag.User = userInfo;
-            return View();
+            return View(userInfo);
         }
 
         [HttpPost]
@@ -79,13 +81,36 @@ namespace Scambio.Web.Controllers
                     picturePost.InputStream, extension);
             }
 
-            ////if (!string.IsNullOrEmpty(bodyPost) && picturePost == null)
+            else
                 _userService.AddPost(new Guid(HttpContext.User.Identity.GetUserId()) , new Guid(HttpContext.User.Identity.GetUserId()), bodyPost);
 
 
             var postsForView = GetPostsByUsername(HttpContext.User.Identity.GetUserName());
             
             return PartialView("_PostsOnWall", postsForView);
+        }
+
+        [HttpPost]
+        public ActionResult DeletePost()
+        {
+            var authorId = Request.Form["authorId"];
+            var postId = Request.Form["postId"];
+            var wallId = Request.Form["wallId"];
+            var userId = HttpContext.User.Identity.GetUserId();
+
+            if(userId == authorId || wallId == userId)
+                _postService.DeletePost(new Guid(postId));
+
+            return new EmptyResult();
+        }
+
+        [HttpPost]
+        public JsonResult LikePost()
+        {
+            var userId = HttpContext.User.Identity.GetUserId();
+            var postId = Request.Form["postId"];
+            _postService.LikePost(new Guid(userId), new Guid(postId));
+            return Json(_postService.GetLikeCount(new Guid(postId)));
         }
 
         public ActionResult PostsOnWall(string username)
@@ -101,11 +126,13 @@ namespace Scambio.Web.Controllers
             {
                 var postView = new PostWallViewModel()
                 {
+                    PostId = post.Id,
                     BodyPost = post.Body,
                     DateCreated = post.DateCreated,
                     FirstNameAuthor = post.Author.FirstName,
                     LastNameAuthor = post.Author.LastName,
-                    LikeCount = post.Likes.Count
+                    LikeCount = _postService.GetLikeCount(post.Id),
+                    AuthorId = post.AuthorId.Value
                 };
 
                 if (post.Picture != null)

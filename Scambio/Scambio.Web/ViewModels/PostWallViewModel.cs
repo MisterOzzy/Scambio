@@ -9,6 +9,8 @@ namespace Scambio.Web.ViewModels
 {
     public class PostWallViewModel
     {
+        public Guid PostId { get; set; }
+        public Guid AuthorId { get; set; }
         public string FirstNameAuthor { get; set; }
         public string LastNameAuthor { get; set; }
         public DateTime DateCreated { get; set; }
