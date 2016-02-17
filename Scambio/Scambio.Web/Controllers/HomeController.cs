@@ -11,6 +11,7 @@ using Scambio.DataAccess.Infrastructure;
 using Scambio.Logic;
 using Scambio.Logic.Interfaces;
 using Scambio.Web.Identity;
+using Scambio.Web.ViewModels;
 
 namespace Scambio.Web.Controllers
 {
@@ -18,9 +19,11 @@ namespace Scambio.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IPictureService _pictureService;
         public HomeController(IUnitOfWork unitOfWork)
         {
-            _userService = new UserService(unitOfWork);
+            _pictureService = new PictureService(unitOfWork);
+            _userService = new UserService(unitOfWork, _pictureService);
         }
 
         // GET: Home
@@ -71,7 +74,41 @@ namespace Scambio.Web.Controllers
             else
                 _userService.AddPost(new Guid(HttpContext.User.Identity.GetUserId()) , new Guid(HttpContext.User.Identity.GetUserId()), bodyPost);
 
-            return RedirectToAction("UserPage", new {username = HttpContext.User.Identity.GetUserName()});
+            var posts = _userService.GetPostsByUsername(HttpContext.User.Identity.GetUserName());
+            var postsForView = new List<PostWallViewModel>();
+            foreach (var post in posts)
+            {
+                var postView = new PostWallViewModel()
+                {
+                    BodyPost = post.Body,
+                    DateCreated = post.DateCreated,
+                    FirstNameAuthor = post.Author.FirstName,
+                    LastNameAuthor = post.Author.LastName,
+                    LikeCount = post.Likes.Count
+                };
+
+                if (post.Picture != null)
+                {
+                    var locationPicture = "/" + _pictureService.GetPictureLocation(ConfigurationManager.AppSettings["pictureStorage"],
+                            post.AuthorId.Value, post.Picture);
+                    postView.PictureLocation = locationPicture.Replace(@"\", @"/");
+                }
+                    
+                        
+
+                postsForView.Add(postView);
+
+            }
+
+            return PartialView("_PostsOnWall", postsForView);
         }
+
+        //public ActionResult PostsOnWall(string username)
+        //{
+
+
+
+        //    return PartialView("_PostsOnWall", new List<PostWallViewModel>());
+        //}
     }
 }

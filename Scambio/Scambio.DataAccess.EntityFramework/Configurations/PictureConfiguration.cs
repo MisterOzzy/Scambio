@@ -8,7 +8,7 @@ namespace Scambio.DataAccess.EntityFramework.Configurations
         public PictureConfiguration()
         {
             Property(p => p.Secret).IsRequired();
-            Property(p => p.CornerFolder).IsOptional();
+            Property(p => p.Extension).IsRequired();
         }
     }
 }

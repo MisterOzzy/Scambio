@@ -283,6 +283,7 @@ namespace Scambio.Web.Identity
             user.Email = identityUser.Email;
             user.FirstName = identityUser.FirstName;
             user.LastName = identityUser.LastName;
+            user.Birthday = identityUser.Birthday;
         }
 
         private IdentityUser getIdentityUser(DomainModels.User user)
@@ -305,6 +306,7 @@ namespace Scambio.Web.Identity
             identityUser.Email = user.Email;
             identityUser.FirstName = user.FirstName;
             identityUser.LastName = user.LastName;
+            identityUser.Birthday = user.Birthday;
         }
         #endregion
     }

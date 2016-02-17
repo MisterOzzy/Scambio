@@ -13,9 +13,11 @@ namespace Scambio.Logic
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public UserService(IUnitOfWork unitOfWork)
+        private readonly IPictureService _pictureService;
+        public UserService(IUnitOfWork unitOfWork, IPictureService pictureService)
         {
             _unitOfWork = unitOfWork;
+            _pictureService = pictureService;
         }
         public UserInfo GetUser(string id)
         {
@@ -63,36 +65,24 @@ namespace Scambio.Logic
             var picture = new Picture()
             {
                 Id = Guid.NewGuid(),
-                Secret = Guid.NewGuid().ToString().Substring(0,8)
+                Secret = Guid.NewGuid().ToString().Substring(0,8),
+                Extension = pictureExtension
             };
 
             _unitOfWork.PictureRepository.Add(picture);
             _unitOfWork.Save();
 
-            var filename = GeneratePictureFilename(picture.Id, picture.Secret) + "." + pictureExtension;
+            var filename = _pictureService.GeneratePictureFilename(picture);
             var pathToFile = Path.Combine(pathToStorage, authorId.ToString());
-            CreatePicture(filename, pathToFile, inputStream);
+
+            _pictureService.CreatePicture(filename, pathToFile, inputStream);
 
             AddPost(authorId, wallOwnerId, bodyPost, picture);
         }
 
-        private void CreatePicture(string filename, string path, Stream inputStream)
+        public IEnumerable<Post> GetPostsByUsername(string username)
         {
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-
-            var fullPath = Path.Combine(path, filename);
-
-            FileStream fileStream = new FileStream(fullPath, FileMode.OpenOrCreate);
-            inputStream.CopyTo(fileStream);
-            fileStream.Close();
-
+            return _unitOfWork.UserRepository.GetPosts(username);
         }
-
-        private string GeneratePictureFilename(Guid pictureId, string pictureSecret)
-        {
-            return $"{pictureId}_{pictureSecret}";
-        }
-
     }
 }

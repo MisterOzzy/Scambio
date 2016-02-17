@@ -14,6 +14,7 @@ namespace Scambio.Logic.Interfaces
         UserInfo GetUser(Guid id);
         void AddPost(Guid authorId, Guid wallOwnerId, string bodyPost, Picture picture = null);
         void AddPostWithPicture(Guid authorId, Guid wallOwnerId, string bodyPost, string pathToStorage, Stream inputStream, string pictureExtension);
+        IEnumerable<Post> GetPostsByUsername(string username);
 
     }
 }

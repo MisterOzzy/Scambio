@@ -1,13 +1,19 @@
 ﻿   
 @{
     Layout = "~/Views/Shared/_SignedLayout.cshtml";
+    //var options = new AjaxOptions()
+    //{
+    //    UpdateTargetId = "postdata",
+    //    Url = Url.Action("PostsOnWall")
+
+    //};
 }
 
 
 
 <div class="main-container">
     <div class="wall">
-        @using (Html.BeginForm("AddPost", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Ajax.BeginForm("AddPost", "Home", new {}, new AjaxOptions { UpdateTargetId = "postdata" }, new { enctype = "multipart/form-data" }))
         {
             <div class="add-post">
                 <div class="form-group">
@@ -26,8 +32,13 @@
                 </div>
             </div>
         }
-        
-        @*<div class="post">
+
+        <div id="postdata">
+            @*@Html.Action("PostsOnWall", new {username = "test1"})*@
+        </div>
+
+
+            @*<div class="post">
             <div class="author-info">
                 <img src="~/Content/Assets/avatar.png" alt="ava" class="img-circle">
                 <div class="author-post">Panda Pandovich</div>
@@ -69,5 +80,10 @@
         </div>*@
 
 
+        </div>
     </div>
-    </div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/ajax");
+}
