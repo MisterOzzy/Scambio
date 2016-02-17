@@ -55,9 +55,17 @@ namespace Scambio.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddPost(string bodyPost, HttpPostedFileBase picturePost)
+        public ActionResult AddPost()
         {
-            
+            HttpPostedFileBase picturePost = null;
+            if (Request.Files.Count != 0)
+                picturePost = Request.Files[0];
+
+            var bodyPost = Request.Form["bodyPost"];
+
+            if(picturePost == null && string.IsNullOrEmpty(bodyPost))
+                return new EmptyResult();
+
             if (picturePost != null)
             {
                 var pictureFolderStorage = ConfigurationManager.AppSettings["pictureStorage"];
@@ -70,10 +78,23 @@ namespace Scambio.Web.Controllers
                     new Guid(HttpContext.User.Identity.GetUserId()), bodyPost, pathToStorage,
                     picturePost.InputStream, extension);
             }
-                
-            else
+
+            ////if (!string.IsNullOrEmpty(bodyPost) && picturePost == null)
                 _userService.AddPost(new Guid(HttpContext.User.Identity.GetUserId()) , new Guid(HttpContext.User.Identity.GetUserId()), bodyPost);
 
+
+            var postsForView = GetPostsByUsername(HttpContext.User.Identity.GetUserName());
+            
+            return PartialView("_PostsOnWall", postsForView);
+        }
+
+        public ActionResult PostsOnWall(string username)
+        {
+            return PartialView("_PostsOnWall", GetPostsByUsername(username));
+        }
+
+        private List<PostWallViewModel> GetPostsByUsername(string username)
+        {
             var posts = _userService.GetPostsByUsername(HttpContext.User.Identity.GetUserName());
             var postsForView = new List<PostWallViewModel>();
             foreach (var post in posts)
@@ -93,22 +114,15 @@ namespace Scambio.Web.Controllers
                             post.AuthorId.Value, post.Picture);
                     postView.PictureLocation = locationPicture.Replace(@"\", @"/");
                 }
-                    
-                        
+
+
 
                 postsForView.Add(postView);
 
             }
 
-            return PartialView("_PostsOnWall", postsForView);
-        }
+            return postsForView;
 
-        //public ActionResult PostsOnWall(string username)
-        //{
-
-
-
-        //    return PartialView("_PostsOnWall", new List<PostWallViewModel>());
-        //}
+        } 
     }
 }
