@@ -1,0 +1,98 @@
+﻿@{
+    Layout = null;
+}
+
+@model Scambio.Web.ViewModels.CropPhotoViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing cropping for images</title>
+
+</head>
+<body>
+
+<p>
+    <a href="#" id="hl-crop-image">Crop Image</a>
+</p>
+
+<p>
+    <img id="my-origin-image" src="@Model.PathToPicture"/>
+</p>
+<p>
+    <img id="my-cropped-image" src="#" style="display: none;"/>
+</p>
+
+
+
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<link href="~/JsLibraries/Jcrop-v0.9.12/css/jquery.Jcrop.min.css" rel="stylesheet"/>
+<script src="~/JsLibraries/Jcrop-v0.9.12/js/jquery.Jcrop.min.js"></script>
+<script type="text/javascript">
+
+    var imageCropWidth = 0;
+    var imageCropHeight = 0;
+    var cropPointX = 0;
+    var cropPointY = 0;
+
+    $(document).ready(function() {
+        initCrop();
+    });
+
+    $("#hl-crop-image").on("click", function(e) {
+        e.preventDefault();
+        cropImage();
+    });
+
+    function initCrop() {
+        $('#my-origin-image').Jcrop({
+            onChange: setCoordsAndImgSize,
+            aspectRatio: 1
+        });
+    }
+
+    function setCoordsAndImgSize(e) {
+
+        imageCropWidth = e.w;
+        imageCropHeight = e.h;
+
+        cropPointX = e.x;
+        cropPointY = e.y;
+    }
+
+    function cropImage() {
+
+        if (imageCropWidth == 0 && imageCropHeight == 0) {
+            alert("Please select crop area.");
+            return;
+        }
+
+        $.ajax({
+            url: '/Account/CropAvatar',
+            type: 'POST',
+            data: {
+                imagePath: $("#my-origin-image").attr("src"),
+                pictureId: '@Model.PictureId',
+                cropPointX: cropPointX,
+                cropPointY: cropPointY,
+                imageCropWidth: imageCropWidth,
+                imageCropHeight: imageCropHeight
+            },
+            success: function (data) {
+                alert(data);
+                window.location.href = data;
+            },
+            error: function(data) {}
+        });
+    }
+
+</script>
+
+</body>
+</html>

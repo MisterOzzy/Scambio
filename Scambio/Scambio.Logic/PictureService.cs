@@ -18,6 +18,12 @@ namespace Scambio.Logic
             _unitOfWork = unitOfWork;
         }
 
+        public void AddPicture(Picture picture)
+        {
+            _unitOfWork.PictureRepository.Add(picture);
+            _unitOfWork.Save();
+        }
+
         public void CreatePicture(string filename, string path, Stream inputStream)
         {
             if (!Directory.Exists(path))
@@ -26,11 +32,14 @@ namespace Scambio.Logic
             var fullPath = Path.Combine(path, filename);
 
             FileStream fileStream = new FileStream(fullPath, FileMode.OpenOrCreate);
+
             inputStream.CopyTo(fileStream);
+            inputStream.Close();
             fileStream.Close();
 
         }
 
+      
         public string GeneratePictureFilename(Guid pictureId, string pictureSecret, string extension)
         {
             return $"{pictureId}_{pictureSecret}.{extension}";

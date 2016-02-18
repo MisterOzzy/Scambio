@@ -10,7 +10,8 @@ namespace Scambio.Logic.Interfaces
 {
     public interface IPictureService
     {
-        void CreatePicture(string filename, string path, Stream inputStream);
+        void AddPicture(Picture picture);
+        void CreatePicture(string filename, string path, Stream inputStream);       
         string GeneratePictureFilename(Picture picture);
         string GeneratePictureFilename(Guid pictureId, string pictureSecret, string extension);
         Picture GetPicture(Guid id);

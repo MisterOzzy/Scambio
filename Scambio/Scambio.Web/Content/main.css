@@ -112,6 +112,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 	padding: 0 20px;
 
 }
+.main-settings {
+    margin: 30px auto;
+}
 
 .form-sign-in, .form-sign-up
 {

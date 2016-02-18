@@ -85,5 +85,13 @@ namespace Scambio.Logic
         {
             return _unitOfWork.UserRepository.GetPosts(username);
         }
+
+        public void ChangeAvatar(Picture picture, Guid userId)
+        {
+            var user = _unitOfWork.UserRepository.GetById(userId);
+            user.Avatar = picture;
+            _unitOfWork.UserRepository.Update(user);
+            _unitOfWork.Save();
+        }
     }
 }

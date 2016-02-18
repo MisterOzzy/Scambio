@@ -1,0 +1,92 @@
+﻿@{
+    Layout = "~/Views/Shared/_SignedLayout.cshtml";
+    ViewBag.Title = "Settings";
+
+}
+
+@model Scambio.Logic.UserInfo
+
+<div class="main-settings">
+    <div class="form-sign-up">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h2 class="panel-title">Settings</h2>
+            </div>
+            <div class="container">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-md-12 control-label">Enter old password</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="Old password...">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-md-12 control-label">Enter new password</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="New password...">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-md-12 control-label">Re-type new password</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="New password...">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12 col-centered">
+                                <button type="reset" class="btn btn-success">Change password</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @using (Html.BeginForm("ChangeAvatar", "Account", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="row">
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Change avatar</label>
+                                <div class="col-lg-9">
+                                    <input type="file" name="newAvatar" class="file-inputs">
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12 col-centered">
+                                    <button type="submit" class="btn btn-success">Change</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/bootstrap.file-input.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.file-inputs').bootstrapFileInput();
+        })
+        
+    </script>
+}

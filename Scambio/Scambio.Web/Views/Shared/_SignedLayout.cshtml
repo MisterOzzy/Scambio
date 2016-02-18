@@ -60,7 +60,10 @@
 
 
                 <ul class="nav navbar-nav navbar-right nav-bar-right-panel">
-                    <li><button class="btn btn-default" type="button">Settings</button></li>
+                    <li>
+                        <button class="btn btn-default" type="button" onclick="document.location.href = $('#settingsUrl').attr('href');">Settings</button>
+                        <a id="settingsUrl" href="@Html.AttributeEncode(Url.Action("Settings", "Account"))" style="display: none;"></a>
+                    </li>
                     <li>
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post))
                         {
@@ -93,9 +96,11 @@
                 if ($(window).scrollTop() >= origOffsetY) {
                     $('.navbar').addClass('sticky');
                     $('.main-container').addClass('navbar-padding');
+                    $('.main-settings').addClass('navbar-padding');
                 } else {
                     $('.navbar').removeClass('sticky');
                     $('.main-container').removeClass('navbar-padding');
+                    $('.main-settings').removeClass('navbar-padding');
                 }
 
 

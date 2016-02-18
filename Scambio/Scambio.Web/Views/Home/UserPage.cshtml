@@ -116,13 +116,7 @@
                 if (files.length != 0)
                     formData.append("PictureUpload", files[0]);
 
-                //for (var i = 0; i < totalFiles; i++)
-                //{
-                //    var file = document.getElementById("FileUpload").files[i];
-
-                //    formData.append("FileUpload", file);
-                //}
-                //e.preventDefault();
+             
                 $.ajax({
                     type: "POST",
                     url: '@Url.Action("AddPost")',
@@ -156,19 +150,6 @@
         });
     </script>
 
-    <script>
-        $(document).ready(function() {
-
-        });
-
-    </script>
-
-    <script>
-        $(document).ready(function() {
-
-        });
-
-    </script>
 }
 
 
