@@ -7,9 +7,73 @@
 	<link type="text/css" rel="stylesheet" href="main.css"/>
 	<link type="text/css" rel="stylesheet" href="media.css"/>
 	<link type="text/css" rel="stylesheet" href="fonts.css"/>
-	
+	<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+
+<!-- Add mousewheel plugin (this is optional) -->
+<!-- <script type="text/javascript" src="fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script> -->
+
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 </head>
 <body>
+
+	<a id="someBtn"  data-toggle="modal" data-target="#myModal">
+		Launch demo modal
+	</a>
+
+
+
+	<!-- Modal -->
+	<div class="modal fade " id="myModal"  tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">People who like this</h4>
+				</div>
+				<div class="modal-body">
+					<div class="liked-user">
+						<img src="ava2.jpg" alt="ava" class="img-circle liked-user-avatar">
+						<span style="liked-user-initial">Ivan Ivaniv</span>
+					</div>
+					<div class="liked-user">
+						<img src="ava2.jpg" alt="ava" class="img-circle liked-user-avatar">
+						<span style="liked-user-initial">Ivan Ivaniv</span>
+					</div>
+					<div class="liked-user">
+						<img src="ava2.jpg" alt="ava" class="img-circle liked-user-avatar">
+						<span style="liked-user-initial">Ivan Ivaniv</span>
+					</div>
+					<div class="liked-user">
+						<img src="ava2.jpg" alt="ava" class="img-circle liked-user-avatar">
+						<span style="liked-user-initial">Ivan Ivaniv</span>
+					</div>
+					<div class="liked-user">
+						<img src="ava2.jpg" alt="ava" class="img-circle liked-user-avatar">
+						<span style="liked-user-initial">Ivan Ivaniv</span>
+					</div>
+					<div class="liked-user">
+						<img src="ava2.jpg" alt="ava" class="img-circle liked-user-avatar">
+						<span style="liked-user-initial">Ivan Ivaniv</span>
+					</div>
+					<div class="liked-user">
+						<img src="ava2.jpg" alt="ava" class="img-circle liked-user-avatar">
+						<span style="liked-user-initial">Ivan Ivaniv</span>
+					</div>
+					<div class="liked-user">
+						<img src="ava2.jpg" alt="ava" class="img-circle liked-user-avatar">
+						<span style="liked-user-initial">Ivan Ivaniv</span>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<header class="main-header">
 		<div class="container-fluid">
 			<div class="row">
@@ -19,6 +83,8 @@
 	</header>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
+
+
 
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -67,8 +133,8 @@
 	<div class="main-container">
 		<div class="wall">
 			<div class="current-user">
-					<img src="ava2.jpg" alt="ava" class="img-rounded current-user-avatar">
-				  <span style="current-user-initial">Ivan Ivaniv</span>
+				<img src="ava2.jpg" alt="ava" class="img-rounded current-user-avatar">
+				<span style="current-user-initial">Ivan Ivaniv</span>
 			</div>
 			<div class="add-post">
 				<div class="form-group">
@@ -112,8 +178,9 @@
 							</div>
 							<div class="photo-container">
 								<div class="photo-area">
-									<img src="test4.jpg" alt="">
-								</div>
+								<a class="fancybox" href="test1.jpg">
+									<img src="test4.jpg" alt=""/>
+								</a>
 							</div>
 						</div>
 
@@ -144,15 +211,30 @@
 			</div>
 
 
+<a class="fancybox" href="http://farm2.staticflickr.com/1459/23610702803_83655c7c56_b.jpg" title="Electrical Power Lines and Pylons disappear over t.. (pautliubomir)">
+	<img src="http://farm2.staticflickr.com/1459/23610702803_83655c7c56_m.jpg" alt="" />
+</a>
+
+<!-- <a class="fancybox" href="test4.jpg">
+									<img src="test4.jpg" alt=""/>
+								</a> -->
 
 
 
-
-			<script src="jquery-1.10.2.min.js"></script>
+			<!-- <script src="jquery-1.10.2.min.js"></script> -->
 			<script src="bootstrap.min.js"></script>
 			<script>
 				$(document).ready(function () {
 
+
+					$(".fancybox").fancybox({
+    	helpers : {
+    		title : {
+    			type : 'over'
+    		}
+    	}
+    });
+					
 					var menu = $('.navbar');
 					var origOffsetY = menu.offset().top;
 
@@ -172,6 +254,6 @@
 
 				});
 			</script>
-
+			
 		</body>
 		</html>

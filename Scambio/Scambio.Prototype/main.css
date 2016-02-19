@@ -291,7 +291,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 }
 
 
-.photo-area>img
+.photo-area img
 {
 	width: auto;
 	height: auto;
@@ -425,4 +425,20 @@ margin: 0 auto;
 	text-align: left;
 	margin-bottom: 20px;
 	font-size: 50px;
+}
+
+.liked-user-avatar
+{
+	width: 50px;
+}
+
+.liked-user
+{
+	display: block;
+	margin: 5px
+}
+
+.modal-body
+{
+	text-align: left;
 }
