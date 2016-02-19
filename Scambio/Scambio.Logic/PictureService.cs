@@ -40,14 +40,14 @@ namespace Scambio.Logic
         }
 
       
-        public string GeneratePictureFilename(Guid pictureId, string pictureSecret, string extension)
+        public string GeneratePictureFilename(Guid pictureId, string pictureSecret, string extension, string postfix = "")
         {
-            return $"{pictureId}_{pictureSecret}.{extension}";
+            return $"{pictureId}_{pictureSecret+postfix}.{extension}";
         }
 
-        public string GeneratePictureFilename(Picture picture)
+        public string GeneratePictureFilename(Picture picture, string postfix = "")
         {
-            return GeneratePictureFilename(picture.Id, picture.Secret, picture.Extension);
+            return GeneratePictureFilename(picture.Id, picture.Secret, picture.Extension, postfix);
         }
 
         public Picture GetPicture(Guid id)
@@ -55,15 +55,15 @@ namespace Scambio.Logic
             return _unitOfWork.PictureRepository.GetById(id);
         }
 
-        public string GetPictureLocation(string pictureStorage, Guid creator, Guid pictureId)
+        public string GetPictureLocation(string pictureStorage, Guid creator, Guid pictureId, string postfix = "")
         {
-            return GetPictureLocation(pictureStorage, creator, GetPicture(pictureId));
+            return GetPictureLocation(pictureStorage, creator, GetPicture(pictureId), postfix);
         }
 
-        public string GetPictureLocation(string pictureStorage, Guid creator, Picture picture)
+        public string GetPictureLocation(string pictureStorage, Guid creator, Picture picture, string postfix = "")
         {
             return Path.Combine(pictureStorage, creator.ToString(),
-                GeneratePictureFilename(picture.Id, picture.Secret, picture.Extension));
+                GeneratePictureFilename(picture.Id, picture.Secret, picture.Extension, postfix));
         }
     }
 }

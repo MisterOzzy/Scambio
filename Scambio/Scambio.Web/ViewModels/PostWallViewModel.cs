@@ -17,5 +17,6 @@ namespace Scambio.Web.ViewModels
         public int LikeCount { get; set; }
         public string BodyPost { get; set; }
         public string PictureLocation { get; set; }
+        public string AuthorAvatar { get; set; }
     }
 }

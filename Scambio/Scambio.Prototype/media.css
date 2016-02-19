@@ -145,6 +145,10 @@
 	max-width: 300px;
 }
 
+.current-user {
+        font-size: 30px;
+    }
+
 }
 
 /* Custom, iPhone Retina */

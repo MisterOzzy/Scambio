@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -29,10 +30,44 @@ namespace Scambio.DataAccess.EntityFramework.Repositories
             return DbSet.FirstOrDefaultAsync(x => x.UserName == username, cancellationToken);
         }
 
-        public IEnumerable<Post> GetPosts(string username)
+        public IEnumerable<Post> GetPosts(string id)
         {
-            var user = FindByUserName(username);
+            var user = GetById(new Guid(id));
             return user.PostsOnWall.ToList();
+        }
+
+        public IEnumerable<User> FindUsers(string query)
+        {
+            var queryArr = query.Split(' ');
+            string query0 = string.Empty;
+
+            if (query.Length >= 1)
+                query0 = queryArr[0];
+
+            IEnumerable<User> users = null;
+
+            switch (queryArr.Length)
+            {
+                case 1:
+                    
+                    users =
+                        DbContext.Users.Where(u => u.FirstName.Contains(query0) || u.LastName.Contains(query0));
+                    break;
+                case 2:
+
+                    var query1 = queryArr[1];
+                    users =
+                        DbContext.Users.Where(
+                            u =>
+                                u.FirstName.Contains(query0) || u.FirstName.Contains(query1) ||
+                                u.LastName.Contains(query0) || u.LastName.Contains(query1));
+                    break;
+                default:
+                    users = new List<User>();
+                    break;
+            }
+
+            return users.ToList();
         }
     }
 }

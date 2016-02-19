@@ -12,11 +12,11 @@ namespace Scambio.Logic.Interfaces
     {
         void AddPicture(Picture picture);
         void CreatePicture(string filename, string path, Stream inputStream);       
-        string GeneratePictureFilename(Picture picture);
-        string GeneratePictureFilename(Guid pictureId, string pictureSecret, string extension);
+        string GeneratePictureFilename(Picture picture, string postfix = "");
+        string GeneratePictureFilename(Guid pictureId, string pictureSecret, string extension, string postfix = "");
         Picture GetPicture(Guid id);
-        string GetPictureLocation(string pictureStorage, Guid creator, Guid pictureId);
-        string GetPictureLocation(string pictureStorage, Guid creator, Picture picture);
+        string GetPictureLocation(string pictureStorage, Guid creator, Guid pictureId, string postfix = "");
+        string GetPictureLocation(string pictureStorage, Guid creator, Picture picture, string postfix = "");
 
     }
 }

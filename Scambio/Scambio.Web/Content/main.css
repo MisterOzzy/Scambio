@@ -475,4 +475,17 @@ margin: 0 auto;
     display: block;
 }
 
+.current-user-avatar
+{
+	width: 100px;
+}
+
+.current-user
+{
+	text-align: left;
+	margin-bottom: 20px;
+	font-size: 50px;
+}
+
+
 

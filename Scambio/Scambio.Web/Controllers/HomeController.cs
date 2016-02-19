@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.UI;
 using Microsoft.AspNet.Identity;
 using Scambio.DataAccess.Infrastructure;
+using Scambio.Domain.Models;
 using Scambio.Logic;
 using Scambio.Logic.Interfaces;
 using Scambio.Web.Identity;
@@ -31,29 +33,33 @@ namespace Scambio.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            //return RedirectToRoute("UserHome", HttpContext.User.Identity.GetUserName());
-            return RedirectToAction("UserPage", new { username = HttpContext.User.Identity.GetUserName()});
-            //if (HttpContext.User.Identity.IsAuthenticated)
-            //{
-            //    return null;
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Login", "Account");
-
-            //}
-            //return HttpContext.User.Identity.GetUserId();
-
-            //return RedirectToAction("Login", "Account");
+            return RedirectToRoute("UserHome", new { username = HttpContext.User.Identity.GetUserName()});
         }
 
         //[Route("{username}")]
         public ActionResult UserPage(string username)
         {
-            var userId = HttpContext.User.Identity.GetUserId();
-            UserInfo userInfo = _userService.GetUser(userId);
-            ViewBag.User = userInfo;
-            return View(userInfo);
+            var userPageViewModel = GetUserPageViewModel(username);
+
+            return View(userPageViewModel);
+        }
+
+        private UserPageViewModel GetUserPageViewModel(string userName)
+        {
+            var logginedUserId = HttpContext.User.Identity.GetUserId();
+            var logginedUsername = HttpContext.User.Identity.GetUserName();
+            var pictureStorage = ConfigurationManager.AppSettings["pictureStorage"];
+
+            UserInfo logginedUserInfo = _userService.GetUser(new Guid(logginedUserId), pictureStorage);
+            UserInfo currentUserInfo = null;
+
+            if (userName != logginedUsername)
+                currentUserInfo = _userService.GetUser(userName, pictureStorage);
+            else
+                currentUserInfo = logginedUserInfo;
+
+            var userPageViewModel = new UserPageViewModel() {CurrentUser = currentUserInfo, LogginedUser = logginedUserInfo};
+            return userPageViewModel;
         }
 
         [HttpPost]
@@ -64,6 +70,7 @@ namespace Scambio.Web.Controllers
                 picturePost = Request.Files[0];
 
             var bodyPost = Request.Form["bodyPost"];
+            var wallId = Request.Form["wallId"];
 
             if(picturePost == null && string.IsNullOrEmpty(bodyPost))
                 return new EmptyResult();
@@ -77,31 +84,33 @@ namespace Scambio.Web.Controllers
                 var extension = tmp[tmp.Length - 1];
 
                 _userService.AddPostWithPicture(new Guid(HttpContext.User.Identity.GetUserId()),
-                    new Guid(HttpContext.User.Identity.GetUserId()), bodyPost, pathToStorage,
+                    new Guid(wallId), bodyPost, pathToStorage,
                     picturePost.InputStream, extension);
             }
 
             else
-                _userService.AddPost(new Guid(HttpContext.User.Identity.GetUserId()) , new Guid(HttpContext.User.Identity.GetUserId()), bodyPost);
+                _userService.AddPost(new Guid(HttpContext.User.Identity.GetUserId()) , new Guid(wallId), bodyPost);
 
 
-            var postsForView = GetPostsByUsername(HttpContext.User.Identity.GetUserName());
+            var postsForView = GetPostsByUserId(wallId);
             
             return PartialView("_PostsOnWall", postsForView);
         }
 
         [HttpPost]
-        public ActionResult DeletePost()
+        public JsonResult DeletePost()
         {
             var authorId = Request.Form["authorId"];
             var postId = Request.Form["postId"];
             var wallId = Request.Form["wallId"];
             var userId = HttpContext.User.Identity.GetUserId();
 
-            if(userId == authorId || wallId == userId)
-                _postService.DeletePost(new Guid(postId));
+            if (userId != authorId && wallId != userId)
+                return Json("");
 
-            return new EmptyResult();
+            _postService.DeletePost(new Guid(postId));
+
+            return Json("Deleted");
         }
 
         [HttpPost]
@@ -113,14 +122,14 @@ namespace Scambio.Web.Controllers
             return Json(_postService.GetLikeCount(new Guid(postId)));
         }
 
-        public ActionResult PostsOnWall(string username)
+        public ActionResult PostsOnWall(string userId)
         {
-            return PartialView("_PostsOnWall", GetPostsByUsername(username));
+            return PartialView("_PostsOnWall", GetPostsByUserId(userId));
         }
 
-        private List<PostWallViewModel> GetPostsByUsername(string username)
+        private List<PostWallViewModel> GetPostsByUserId(string userId)
         {
-            var posts = _userService.GetPostsByUsername(HttpContext.User.Identity.GetUserName());
+            var posts = _userService.GetPostsByUserId(userId);
             var postsForView = new List<PostWallViewModel>();
             foreach (var post in posts)
             {
@@ -132,8 +141,11 @@ namespace Scambio.Web.Controllers
                     FirstNameAuthor = post.Author.FirstName,
                     LastNameAuthor = post.Author.LastName,
                     LikeCount = _postService.GetLikeCount(post.Id),
-                    AuthorId = post.AuthorId.Value
+                    AuthorId = post.AuthorId.Value,
+                    AuthorAvatar = GetUserAvatarLocation(post.Author)
                 };
+
+
 
                 if (post.Picture != null)
                 {
@@ -141,15 +153,31 @@ namespace Scambio.Web.Controllers
                             post.AuthorId.Value, post.Picture);
                     postView.PictureLocation = locationPicture.Replace(@"\", @"/");
                 }
-
-
-
                 postsForView.Add(postView);
 
             }
 
-            return postsForView;
+            return postsForView.OrderByDescending(p => p.DateCreated).ToList();
+        }
 
-        } 
+        [HttpGet]
+        public ActionResult FindUsers(string searchQuery)
+        {
+            IEnumerable<User> users = _userService.FindUsers(searchQuery);
+
+            var userPageViewModel = GetUserPageViewModel(HttpContext.User.Identity.GetUserName());
+            return View(userPageViewModel);
+        }
+
+        private string GetUserAvatarLocation(User user)
+        {
+            if (user.Avatar == null)
+                return string.Empty;
+
+            var avatarLocation = "/" + _pictureService.GetPictureLocation(ConfigurationManager.AppSettings["pictureStorage"],
+                            user.Id, user.Avatar, "_ava");
+
+            return avatarLocation.Replace(@"\", @"/");
+        }
     }
 }

@@ -206,9 +206,11 @@
     <Compile Include="ViewModels\PostWallViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\UploadPostViewModel.cs" />
+    <Compile Include="ViewModels\UserPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Assets\back_pattern.png" />
+    <Content Include="Content\Assets\no_avatar.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts.css" />
@@ -282,12 +284,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Account\About.cshtml" />
-    <Content Include="Views\Account\Contact.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Settings.cshtml" />
     <Content Include="Views\Account\CropPhoto.cshtml" />
+    <Content Include="Views\Home\FindUsers.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\UserPage.cshtml" />
     <Content Include="Views\Shared\_SignedLayout.cshtml" />

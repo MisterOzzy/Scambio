@@ -19,14 +19,27 @@ namespace Scambio.Logic
             _unitOfWork = unitOfWork;
             _pictureService = pictureService;
         }
-        public UserInfo GetUser(string id)
+        public UserInfo GetUser(string username, string pictureStorage = null)
         {
-            return GetUser(Guid.Parse(id));
+            var user = _unitOfWork.UserRepository.FindByUserName(username);
+            var userInfo =  GetUserInfo(user, pictureStorage);
+
+            return userInfo;
         }
 
-        public UserInfo GetUser(Guid id)
+        public UserInfo GetUser(Guid id, string pictureStorage = null)
         {
-            User user = _unitOfWork.UserRepository.GetById(id);
+            var user = _unitOfWork.UserRepository.GetById(id);
+            return GetUserInfo(user, pictureStorage);
+        }
+
+        private string GetAvatarLocation(User user, string pictureStorage)
+        {
+            return _pictureService.GetPictureLocation(pictureStorage, user.Id, user.Avatar, "_ava");
+        }
+
+        private UserInfo GetUserInfo(User user, string pictureStorage)
+        {
             var userInfo = new UserInfo()
             {
                 Id = user.Id,
@@ -35,6 +48,9 @@ namespace Scambio.Logic
                 LastName = user.LastName,
                 Birthday = user.Birthday
             };
+
+            if (!string.IsNullOrEmpty(pictureStorage) && user.Avatar != null)
+                userInfo.AvatarLocation = "/" + GetAvatarLocation(user, pictureStorage).Replace(@"\", @"/");
 
             return userInfo;
         }
@@ -81,9 +97,9 @@ namespace Scambio.Logic
             AddPost(authorId, wallOwnerId, bodyPost, picture);
         }
 
-        public IEnumerable<Post> GetPostsByUsername(string username)
+        public IEnumerable<Post> GetPostsByUserId(string userId)
         {
-            return _unitOfWork.UserRepository.GetPosts(username);
+            return _unitOfWork.UserRepository.GetPosts(userId);
         }
 
         public void ChangeAvatar(Picture picture, Guid userId)
@@ -92,6 +108,11 @@ namespace Scambio.Logic
             user.Avatar = picture;
             _unitOfWork.UserRepository.Update(user);
             _unitOfWork.Save();
+        }
+
+        public IEnumerable<User> FindUsers(string query)
+        {
+            return _unitOfWork.UserRepository.FindUsers(query);
         }
     }
 }

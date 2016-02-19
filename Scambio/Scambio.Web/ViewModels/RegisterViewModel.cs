@@ -16,10 +16,12 @@ namespace Scambio.Web.ViewModels
 
         [Display(Name = "First name")]
         [Required(ErrorMessage = "Field must be filled")]
+        [RegularExpression(@"^\S+", ErrorMessage = "Incorrect First name")]
         [StringLength(256, ErrorMessage = "The field should have a length of more than 3", MinimumLength = 3)]
         public string FirstName { get; set; }
 
         [Display(Name = "Last name")]
+        [RegularExpression(@"^\S+", ErrorMessage = "Incorrect Last name")]
         [Required(ErrorMessage = "Field must be filled")]
         [StringLength(256, ErrorMessage = "The field should have a length of more than 3", MinimumLength = 3)]
         public string LastName{ get; set; }

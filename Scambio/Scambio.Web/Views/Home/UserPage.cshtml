@@ -1,56 +1,62 @@
-﻿   
-@{
+﻿@{
     Layout = "~/Views/Shared/_SignedLayout.cshtml";
-    //var options = new AjaxOptions()
-    //{
-    //    UpdateTargetId = "postdata",
-    //    Url = Url.Action("PostsOnWall")
-
-    //};
-    @model Scambio.Logic.UserInfo
+    ViewBag.Title = $"{Model.CurrentUser.FirstName} {Model.CurrentUser.LastName}";
+    @model Scambio.Web.ViewModels.UserPageViewModel
 }
 
 
 <div class="main-container">
-    <div class="wall" id="@Model.Id">
-       
+    <div class="wall" id="@Model.CurrentUser.Id">
+        @if (Model.CurrentUser.Id != Model.LogginedUser.Id)
+        {
+            <div class="current-user">
+                
+                @if (!string.IsNullOrEmpty(Model.CurrentUser.AvatarLocation))
+                {
+                    <img src="@Model.LogginedUser.AvatarLocation" alt="ava" class="img-rounded current-user-avatar">
+                }
+                else
+                {
+                    <img src="~/Content/Assets/no_avatar.png" alt="ava" class="img-rounded current-user-avatar">
+                }
+                <span>@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</span>
+            </div>
+        }
+
         <div class="add-post">
             <div class="form-group">
                 <div class="input-group">
                     <input type="text" name="bodyPost" id="tbBodyPost" class="form-control" placeholder="Enter text here...">
                     <span class="input-group-btn">
-                            <span class="btn btn-default btn-add-picture btn-file">
-                                <i class="glyphicon glyphicon-picture"></i>
-                                <input type="file" accept="image/*" name="picturePost" id="PictureUpload">
-                            </span>
+                        <span class="btn btn-default btn-add-picture btn-file">
+                            <i class="glyphicon glyphicon-picture"></i>
+                            <input type="file" accept="image/*" name="picturePost" id="PictureUpload">
                         </span>
+                    </span>
                     <span class="input-group-btn ">
-                            <input class="btn btn-default send-msg-btn" id="btnSend" type="submit" value="Send">
-                        </span>
+                        <input class="btn btn-default send-msg-btn" id="btnSend" type="submit" value="Send">
+                    </span>
                 </div>
             </div>
         </div>
-        
+
         <div id="postdata">
-            @Html.Action("PostsOnWall", new {username = "test1"})
+            @Html.Action("PostsOnWall", new {userId = Model.CurrentUser.Id})
         </div>
 
 
-
-
     </div>
-    </div>
+</div>
 
 
-    @*@Scripts.Render("~/bundles/jquery")*@
+@*@Scripts.Render("~/bundles/jquery")*@
 @section scripts
 {
     <script>
-        
+
         function bindBtnLike() {
             $(".btn-like").click(function () {
                 var postId = $(this).parent().parent().parent().parent().attr('id');
-
                 var formData = new FormData();
                 formData.append("postId", postId);
                 var thisBtn = $(this);
@@ -88,11 +94,16 @@
                     type: "POST",
                     url: '@Url.Action("DeletePost")',
                     data: formData,
-                    dataType: 'html',
+                    dataType: 'json',
                     contentType: false,
                     processData: false,
                     success: function (data) {
-                        thisBtn.parent().parent().parent().remove();
+                        if (data === "Deleted") {
+                            thisBtn.parent().parent().parent().remove();
+                        }
+                            
+                        
+                        
                     },
 
 
@@ -108,15 +119,17 @@
             bindBtnDelete();
             bindBtnLike();
 
-            $("#btnSend").click(function() {
+            $("#btnSend").click(function () {
                 var formData = new FormData();
+                var wallId = $(".wall").attr('id');
                 formData.append("bodyPost", $("#tbBodyPost").val());
+                formData.append("wallId", wallId);
                 var files = document.getElementById("PictureUpload").files;
 
                 if (files.length != 0)
                     formData.append("PictureUpload", files[0]);
 
-             
+
                 $.ajax({
                     type: "POST",
                     url: '@Url.Action("AddPost")',
@@ -124,7 +137,7 @@
                     dataType: 'html',
                     contentType: false,
                     processData: false,
-                    success: function(data) {
+                    success: function (data) {
                         //Fill div with results
                         if (data !== "") {
                             $("#postdata").html(data);
@@ -137,19 +150,14 @@
 
 
                     },
-                    error: function(xhr, status, error) {
+                    error: function (xhr, status, error) {
                         alert(xhr.responseText);
                     }
                 });
             });
 
 
-            
-
-
         });
     </script>
 
 }
-
-

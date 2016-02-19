@@ -9,7 +9,7 @@ namespace Scambio.Domain.Models
         private ICollection<User> _users;
         public Guid Id { get; set; }
         public Guid? AuthorId { get; set; }
-        public User Author { get; set; }
+        public virtual User Author { get; set; }
         public DateTime DateCreated { get; set; }
         public virtual Picture Picture { get; set; }
         public string Body { get; set; }

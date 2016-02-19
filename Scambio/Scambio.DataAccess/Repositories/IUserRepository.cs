@@ -15,5 +15,6 @@ namespace Scambio.DataAccess.Repositories
         Task<User> FindByUserNameAsync(string username);
         Task<User> FindByUserNameAsync(CancellationToken cancellationToken, string username);
         IEnumerable<Post> GetPosts(string username);
+        IEnumerable<User> FindUsers(string query);
     }
 }

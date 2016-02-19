@@ -4,7 +4,15 @@
 {
     <div class="post" id="@post.PostId">
         <div class="author-info">
-            <img src="~/Content/Assets/avatar.png" alt="ava" class="img-circle">
+            @if (!string.IsNullOrEmpty(post.AuthorAvatar))
+            {
+                <img src="@post.AuthorAvatar" alt="ava" class="img-circle">
+            }
+            else
+            {
+                <img src="~/Content/Assets/no_avatar.png" alt="ava" class="img-circle">
+            }
+            
             <div class="author-post" id="@post.AuthorId">@post.FirstNameAuthor @post.LastNameAuthor</div>
             <div class="btn-delete-post">
                 <button type="button" class="close btn-delete-post-id">×</button>

@@ -13,5 +13,6 @@ namespace Scambio.Logic
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime? Birthday { get; set; }
+        public string AvatarLocation { get; set; }
     }
 }

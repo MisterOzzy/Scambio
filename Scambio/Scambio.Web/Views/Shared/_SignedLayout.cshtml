@@ -1,5 +1,5 @@
 ﻿@{
-    @model Scambio.Logic.UserInfo
+    @model Scambio.Web.ViewModels.UserPageViewModel
 }
 
 
@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.User.FirstName @ViewBag.User.LastName</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     
@@ -33,7 +33,15 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img src="~/Content/Assets/avatar.png" alt="ava" class="img-rounded">
+                    @if (!string.IsNullOrEmpty(Model.LogginedUser.AvatarLocation))
+                    {
+                        <img src="@Model.LogginedUser.AvatarLocation" alt="ava" class="img-rounded">
+                    }
+                    else
+                    {
+                        <img src="~/Content/Assets/no_avatar.png" alt="ava" class="img-rounded">
+                    }
+                    
                 </a>
             </div>
 
@@ -41,18 +49,19 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="initial">@Model.FirstName @Model.LastName</li>
+                    <li class="initial">@Model.LogginedUser.FirstName @Model.LogginedUser.LastName</li>
                     <li>
-                        <form class="navbar-form navbar-left">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="text" class="form-control nav-search-size navbar-search-users-tb" placeholder="Search other users...">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default navbar-search-users" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                        @using (Html.BeginForm("FindUsers", "Home", FormMethod.Get, new { @class= "navbar-form navbar-left" }))
+                        {
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" name="searchQuery" class="form-control nav-search-size navbar-search-users-tb" placeholder="Search other users...">
+                                        <span class="input-group-btn">
+                                        <button class="btn btn-default navbar-search-users" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                                     </span>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                        }
                     </li>
                 </ul>
 
