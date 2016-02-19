@@ -211,8 +211,14 @@
   <ItemGroup>
     <Content Include="Content\Assets\back_pattern.png" />
     <Content Include="Content\Assets\no_avatar.png" />
+    <Content Include="Content\blank.gif" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fancybox_loading%402x.gif" />
+    <Content Include="Content\fancybox_loading.gif" />
+    <Content Include="Content\fancybox_overlay.png" />
+    <Content Include="Content\fancybox_sprite%402x.png" />
+    <Content Include="Content\fancybox_sprite.png" />
     <Content Include="Content\fonts.css" />
     <Content Include="Content\jquery.fancybox.css" />
     <Content Include="Content\main.css" />
