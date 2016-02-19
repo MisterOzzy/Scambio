@@ -1,19 +1,36 @@
-﻿@using Scambio.Domain.Models
+﻿@using Scambio.Logic
 @model Scambio.Web.ViewModels.UserPageViewModel
 @{
-    IEnumerable<User> foundUsers = ViewBag.Users;
+    IEnumerable<UserInfo> foundUsers = ViewBag.Users;
     Layout = "~/Views/Shared/_SignedLayout.cshtml";
 }
 
-<!DOCTYPE html>
+<div class="main-container find-container-mxw">
+    <div class="find-container">
+        @if (!foundUsers.Any())
+        {
+            
+            <label class="not-found-users-label">Not found users</label>
+        }
+            
+        @foreach (var user in foundUsers)
+        {
+            <div class="user">
+                <div class="user-avatar">
+                    @if (!string.IsNullOrEmpty(user.AvatarLocation))
+                    {
+                        <img src="@user.AvatarLocation" alt="ava" class="img-circle">
+                    }
+                    else
+                    {
+                        <img src="~/Content/Assets/no_avatar.png" alt="ava" class="img-circle">
+                    }
+                </div>
+                <div class="user-initial">
+                    <a href="@Url.RouteUrl("UserHome", new {username = user.Username})">@user.FirstName @user.LastName</a>
+                </div>
+            </div>
+        }
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>FindUsers</title>
-</head>
-<body>
-    <div> 
     </div>
-</body>
-</html>
+</div>

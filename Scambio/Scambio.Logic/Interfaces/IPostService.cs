@@ -11,5 +11,6 @@ namespace Scambio.Logic.Interfaces
         int GetLikeCount(Guid postId);
         void LikePost(Guid userId, Guid postId);
         void DeletePost(Guid postId);
+        IEnumerable<UserInfo> GetLikedUsers(IUserService userService,string postId, string pictureStorage);
     }
 }

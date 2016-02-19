@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<Scambio.Web.ViewModels.PostWallViewModel>
 
+
+
+
 @foreach (var post in Model)
 {
     <div class="post" id="@post.PostId">
@@ -41,7 +44,9 @@
         <div class="date-like-info">
             <div class="date-info">@post.DateCreated.ToString()</div>
             <div class="like-container">
-                <div class="look-like">Look</div>
+                <div class="look-like">
+                    <a class="look-btn" data-toggle="modal" data-target="#myModal" >Look</a>
+                </div>
                 <div class="like-count">@post.LikeCount</div>
                 <div class="btn-like-wrapper">
                     <button class="btn btn-default btn-like clearfix" type="button">
@@ -53,3 +58,4 @@
         </div>
     </div>
 }
+

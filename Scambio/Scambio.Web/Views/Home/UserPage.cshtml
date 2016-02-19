@@ -4,8 +4,25 @@
     @model Scambio.Web.ViewModels.UserPageViewModel
 }
 
+<div class="modal fade " id="myModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">People who liked this</h4>
+            </div>
+            <div class="modal-body" id="modalBodyLikes">
 
-<div class="main-container">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="main-container">
     <div class="wall" id="@Model.CurrentUser.Id">
         @if (Model.CurrentUser.Id != Model.LogginedUser.Id)
         {
@@ -13,7 +30,7 @@
                 
                 @if (!string.IsNullOrEmpty(Model.CurrentUser.AvatarLocation))
                 {
-                    <img src="@Model.LogginedUser.AvatarLocation" alt="ava" class="img-rounded current-user-avatar">
+                    <img src="@Model.CurrentUser.AvatarLocation" alt="ava" class="img-rounded current-user-avatar">
                 }
                 else
                 {
@@ -115,9 +132,38 @@
             });
         }
 
+
+        function bindBtnLook() {
+            $(".look-btn").click(function () {
+                var postId = $(this).parent().parent().parent().parent().attr('id');
+               
+                var formData = new FormData();
+                formData.append("postId", postId);
+                var thisBtn = $(this);
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetLikedUsers")',
+                    data: formData,
+                    dataType: 'html',
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        $("#modalBodyLikes").html(data);
+                    },
+
+
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                    }
+                });
+
+            });
+        }
+
         $(document).ready(function () {
             bindBtnDelete();
             bindBtnLike();
+            bindBtnLook();
 
             $("#btnSend").click(function () {
                 var formData = new FormData();
@@ -146,6 +192,7 @@
                             $("#PictureUpload").val('');
                             bindBtnDelete();
                             bindBtnLike();
+                            bindBtnLook();
                         }
 
 
@@ -155,6 +202,9 @@
                     }
                 });
             });
+
+
+
 
 
         });

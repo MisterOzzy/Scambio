@@ -487,5 +487,53 @@ margin: 0 auto;
 	font-size: 50px;
 }
 
+.liked-user-avatar
+{
+	width: 50px;
+}
+
+.liked-user
+{
+	display: block;
+	margin: 5px
+}
+
+.modal-body
+{
+	text-align: left;
+}
+
+.look-btn{
+    color: #333;
+}
+
+.look-btn:hover
+{
+    color: black;
+    cursor: pointer;
+}
+
+.btn-crop-wrapper {
+    display: block;
+    text-align: center;
+}
+
+.crop-photo-container {
+    margin: auto 20px;
+    padding: 10px 30px;
+    display: block;
+    overflow-x: scroll;
+}
+
+
+.original-picture {
+    display: block;
+}
+
+.not-found-users-label {
+    display: block; 
+    text-align: center;
+}
+
 
 

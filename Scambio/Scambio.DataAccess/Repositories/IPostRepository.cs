@@ -10,6 +10,7 @@ namespace Scambio.DataAccess.Repositories
 {
     public interface IPostRepository : IRepository<Post>
     {
+        IEnumerable<Like> GetLikes(Guid postId);
 
     }
 }

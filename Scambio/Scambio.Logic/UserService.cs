@@ -38,7 +38,7 @@ namespace Scambio.Logic
             return _pictureService.GetPictureLocation(pictureStorage, user.Id, user.Avatar, "_ava");
         }
 
-        private UserInfo GetUserInfo(User user, string pictureStorage)
+        public UserInfo GetUserInfo(User user, string pictureStorage)
         {
             var userInfo = new UserInfo()
             {
@@ -110,9 +110,16 @@ namespace Scambio.Logic
             _unitOfWork.Save();
         }
 
-        public IEnumerable<User> FindUsers(string query)
+        public IEnumerable<UserInfo> FindUsers(string query, string pictureStorage)
         {
-            return _unitOfWork.UserRepository.FindUsers(query);
+            var users = _unitOfWork.UserRepository.FindUsers(query);
+            var userInfos = new List<UserInfo>();
+            foreach (var user in users)
+                userInfos.Add(GetUserInfo(user, pictureStorage));
+
+            return userInfos;
         }
+
+
     }
 }

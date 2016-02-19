@@ -9,8 +9,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    
+    
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
     
     
 </head>
@@ -32,7 +35,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand fancybox" href="~/Content/Assets/avatar.png">
                     @if (!string.IsNullOrEmpty(Model.LogginedUser.AvatarLocation))
                     {
                         <img src="@Model.LogginedUser.AvatarLocation" alt="ava" class="img-rounded">
@@ -95,30 +98,42 @@
     
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <script>
-        $(document).ready(function () {
+    <script type="text/javascript" src="~/Scripts/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script>
+    $(document).ready(function () {
 
-            var menu = $('.navbar');
-            var origOffsetY = menu.offset().top;
-
-            function scroll() {
-                if ($(window).scrollTop() >= origOffsetY) {
-                    $('.navbar').addClass('sticky');
-                    $('.main-container').addClass('navbar-padding');
-                    $('.main-settings').addClass('navbar-padding');
-                } else {
-                    $('.navbar').removeClass('sticky');
-                    $('.main-container').removeClass('navbar-padding');
-                    $('.main-settings').removeClass('navbar-padding');
+        $(".fancybox").fancybox({
+            helpers: {
+                title: {
+                    type: 'over'
                 }
+            }
+        });
 
+        var menu = $('.navbar');
+        var origOffsetY = menu.offset().top;
 
+        function scroll() {
+            if ($(window).scrollTop() >= origOffsetY) {
+                $('.navbar').addClass('sticky');
+                $('.main-container').addClass('navbar-padding');
+                $('.main-settings').addClass('navbar-padding');
+                $('.btn-crop-wrapper').addClass('navbar-padding');
+            } else {
+                $('.navbar').removeClass('sticky');
+                $('.main-container').removeClass('navbar-padding');
+                $('.main-settings').removeClass('navbar-padding');
+                $('.btn-crop-wrapper').removeClass('navbar-padding');
             }
 
-            document.onscroll = scroll;
 
-        });
-    </script>
+        }
+
+        document.onscroll = scroll;
+
+    });
+</script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Scambio.Logic.UserInfo>
+
+
+@foreach (var user in Model)
+{
+    <div class="liked-user">
+        @if (!string.IsNullOrEmpty(user.AvatarLocation))
+        {
+            <img src="@user.AvatarLocation" alt="ava" class="img-circle liked-user-avatar">
+        }
+        else
+        {
+            <img src="~/Content/Assets/no_avatar.png" alt="ava" class="img-circle liked-user-avatar">
+        }
+
+
+        <span class="liked-user-initial">@user.FirstName @user.LastName</span>
+    </div>
+}
+

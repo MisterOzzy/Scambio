@@ -47,5 +47,16 @@ namespace Scambio.Logic
             _unitOfWork.PostRepository.Delete(p => p.Id == postId);
             _unitOfWork.Save();
         }
+
+        public IEnumerable<UserInfo> GetLikedUsers(IUserService userService,string postId, string pictureStorage)
+        {
+            var likes = _unitOfWork.PostRepository.GetLikes(new Guid(postId));
+            
+            var likedUserInfos = likes.Select(like => userService.GetUserInfo(like.User, pictureStorage)).ToList();
+
+            return likedUserInfos;
+        }
+
+
     }
 }

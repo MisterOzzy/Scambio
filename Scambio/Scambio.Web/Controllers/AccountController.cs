@@ -60,7 +60,7 @@ namespace Scambio.Web.Controllers
         public ActionResult Settings()
         {
             var userId = HttpContext.User.Identity.GetUserId();
-            var user = _userService.GetUser(new Guid(userId));
+            var user = _userService.GetUser(new Guid(userId), ConfigurationManager.AppSettings["pictureStorage"]);
             var userPageViewModel = new UserPageViewModel()
             {
                 CurrentUser = user,
@@ -105,8 +105,16 @@ namespace Scambio.Web.Controllers
                 PictureId = picture.Id
             };
 
+            ViewBag.CropPhotoViewModel = cropPhotoViewModel;
 
-            return View("CropPhoto", cropPhotoViewModel);
+            var user = _userService.GetUser(new Guid(userId), ConfigurationManager.AppSettings["pictureStorage"]);
+            var userPageViewModel = new UserPageViewModel()
+            {
+                LogginedUser = user,
+                CurrentUser = user
+            };
+
+            return View("CropPhoto", userPageViewModel);
         }
 
         [HttpPost]

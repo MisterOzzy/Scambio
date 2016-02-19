@@ -163,10 +163,22 @@ namespace Scambio.Web.Controllers
         [HttpGet]
         public ActionResult FindUsers(string searchQuery)
         {
-            IEnumerable<User> users = _userService.FindUsers(searchQuery);
+            IEnumerable<UserInfo> users = _userService.FindUsers(searchQuery,
+                ConfigurationManager.AppSettings["pictureStorage"]);
+            ViewBag.Users = users;
+
 
             var userPageViewModel = GetUserPageViewModel(HttpContext.User.Identity.GetUserName());
             return View(userPageViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult GetLikedUsers(string postId)
+        {
+            IEnumerable<UserInfo> likedUsers = _postService.GetLikedUsers(_userService, postId,
+                ConfigurationManager.AppSettings["pictureStorage"]);
+
+            return PartialView("_LikedUsers", likedUsers);
         }
 
         private string GetUserAvatarLocation(User user)

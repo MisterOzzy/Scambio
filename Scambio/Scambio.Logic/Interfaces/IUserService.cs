@@ -16,6 +16,7 @@ namespace Scambio.Logic.Interfaces
         void AddPostWithPicture(Guid authorId, Guid wallOwnerId, string bodyPost, string pathToStorage, Stream inputStream, string pictureExtension);
         IEnumerable<Post> GetPostsByUserId(string userId);
         void ChangeAvatar(Picture picture, Guid userId);
-        IEnumerable<User> FindUsers(string query);
+        IEnumerable<UserInfo> FindUsers(string query, string pictureStorage);
+        UserInfo GetUserInfo(User user, string pictureStorage);
     }
 }

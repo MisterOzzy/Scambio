@@ -51,7 +51,7 @@ namespace Scambio.DataAccess.EntityFramework.Repositories
                 case 1:
                     
                     users =
-                        DbContext.Users.Where(u => u.FirstName.Contains(query0) || u.LastName.Contains(query0));
+                        DbContext.Users.Where(u => u.FirstName == query0 || u.LastName == query0);
                     break;
                 case 2:
 
@@ -59,8 +59,8 @@ namespace Scambio.DataAccess.EntityFramework.Repositories
                     users =
                         DbContext.Users.Where(
                             u =>
-                                u.FirstName.Contains(query0) || u.FirstName.Contains(query1) ||
-                                u.LastName.Contains(query0) || u.LastName.Contains(query1));
+                                u.FirstName == query0 || u.FirstName == query1 ||
+                                u.LastName == query0 || u.LastName == query1);
                     break;
                 default:
                     users = new List<User>();
