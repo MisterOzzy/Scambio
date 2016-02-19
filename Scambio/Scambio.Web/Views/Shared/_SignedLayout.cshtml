@@ -9,13 +9,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    
-    
+
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="~/Content/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
-    
-    
+
+
 </head>
 <body>
     <header class="main-header">
@@ -35,35 +35,52 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand fancybox" href="~/Content/Assets/avatar.png">
-                    @if (!string.IsNullOrEmpty(Model.LogginedUser.AvatarLocation))
+                @if (!string.IsNullOrEmpty(Model.LogginedUser.AvatarLocation))
+                {
+                    <a class="navbar-brand fancybox" href="@Model.LogginedUser.OriginalAvatarLocation">
+                        <img src="@Model.LogginedUser.AvatarLocation" alt="ava" class="img-rounded">
+                    </a>
+                }
+
+                else
+                {
+                    <a class="navbar-brand fancybox" href="~/Content/Assets/no_avatar.png">
+                        <img src="~/Content/Assets/no_avatar.png" alt="ava" class="img-rounded">
+                    </a>
+                }
+
+                @*@if (!string.IsNullOrEmpty(Model.LogginedUser.AvatarLocation))
                     {
                         <img src="@Model.LogginedUser.AvatarLocation" alt="ava" class="img-rounded">
                     }
                     else
                     {
                         <img src="~/Content/Assets/no_avatar.png" alt="ava" class="img-rounded">
-                    }
-                    
-                </a>
+                    }*@
+
+
             </div>
 
 
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="initial">@Model.LogginedUser.FirstName @Model.LogginedUser.LastName</li>
+                    <li class="initial">
+                        <a href="@Url.RouteUrl("UserHome", new {username = Model.LogginedUser.Username})">
+                            @Model.LogginedUser.FirstName @Model.LogginedUser.LastName
+                        </a>
+                    </li>
                     <li>
-                        @using (Html.BeginForm("FindUsers", "Home", FormMethod.Get, new { @class= "navbar-form navbar-left" }))
+                        @using (Html.BeginForm("FindUsers", "Home", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
                         {
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="text" name="searchQuery" class="form-control nav-search-size navbar-search-users-tb" placeholder="Search other users...">
-                                        <span class="input-group-btn">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" name="searchQuery" class="form-control nav-search-size navbar-search-users-tb" placeholder="Search other users...">
+                                    <span class="input-group-btn">
                                         <button class="btn btn-default navbar-search-users" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                                     </span>
-                                    </div>
                                 </div>
+                            </div>
                         }
                     </li>
                 </ul>
@@ -82,9 +99,9 @@
                             @Html.AntiForgeryToken()
                             <button type="submit" class="btn btn-default">Sign Out</button>
                         }
-                        
+
                         @*<button class="btn btn-default" name="btnSignOut" type="button" onclick="document.location.href = $('#signOutUrl').attr('href');">Sign Out</button>
-                        <a id="signOutUrl" href="@Html.AttributeEncode(Url.Action("LogOff", "Account"))" style="display:none;"></a>*@
+                            <a id="signOutUrl" href="@Html.AttributeEncode(Url.Action("LogOff", "Account"))" style="display:none;"></a>*@
                     </li>
 
                 </ul>
@@ -95,44 +112,44 @@
     </nav>
     @RenderBody()
 
-    
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script type="text/javascript" src="~/Scripts/jquery.fancybox.pack.js?v=2.1.5"></script>
-<script>
-    $(document).ready(function () {
+    <script>
+        $(document).ready(function () {
 
-        $(".fancybox").fancybox({
-            helpers: {
-                title: {
-                    type: 'over'
+            $(".fancybox").fancybox({
+                helpers: {
+                    title: {
+                        type: 'over'
+                    }
                 }
+            });
+
+            var menu = $('.navbar');
+            var origOffsetY = menu.offset().top;
+
+            function scroll() {
+                if ($(window).scrollTop() >= origOffsetY) {
+                    $('.navbar').addClass('sticky');
+                    $('.main-container').addClass('navbar-padding');
+                    $('.main-settings').addClass('navbar-padding');
+                    $('.btn-crop-wrapper').addClass('navbar-padding');
+                } else {
+                    $('.navbar').removeClass('sticky');
+                    $('.main-container').removeClass('navbar-padding');
+                    $('.main-settings').removeClass('navbar-padding');
+                    $('.btn-crop-wrapper').removeClass('navbar-padding');
+                }
+
+
             }
+
+            document.onscroll = scroll;
+
         });
-
-        var menu = $('.navbar');
-        var origOffsetY = menu.offset().top;
-
-        function scroll() {
-            if ($(window).scrollTop() >= origOffsetY) {
-                $('.navbar').addClass('sticky');
-                $('.main-container').addClass('navbar-padding');
-                $('.main-settings').addClass('navbar-padding');
-                $('.btn-crop-wrapper').addClass('navbar-padding');
-            } else {
-                $('.navbar').removeClass('sticky');
-                $('.main-container').removeClass('navbar-padding');
-                $('.main-settings').removeClass('navbar-padding');
-                $('.btn-crop-wrapper').removeClass('navbar-padding');
-            }
-
-
-        }
-
-        document.onscroll = scroll;
-
-    });
-</script>
+    </script>
 
     @RenderSection("scripts", required: false)
 </body>

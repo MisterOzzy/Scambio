@@ -192,11 +192,23 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 	padding: 5px;
 }
 
+.navbar-nav > li > a {
+    line-height: 33px;
+    color: #5c5c5c;
+}
+
+.navbar-nav > li > a:focus {
+    outline: none;
+}
+
+.navbar-header a:focus {
+    outline: none
+}
+
 .initial
 {
 	font-size: 40px;
 	padding-top: 20px;
-	padding-left: 15px; 
 }
 
 .navbar .navbar-form {
@@ -351,7 +363,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 }
 
 
-.photo-area>img
+.photo-area img
 {
 	width: auto;
 	height: auto;
@@ -503,14 +515,18 @@ margin: 0 auto;
 	text-align: left;
 }
 
-.look-btn{
+.look-btn, .link-author{
     color: #333;
+    outline: none;
 }
 
-.look-btn:hover
+.look-btn:hover, .link-author:hover
 {
     color: black;
     cursor: pointer;
+}
+.look-btn:focus, .link-author:focus {
+    outline: none;
 }
 
 .btn-crop-wrapper {
@@ -535,5 +551,9 @@ margin: 0 auto;
     text-align: center;
 }
 
+.current-user a {
+    text-decoration: none;
+    outline: none;
+}
 
 

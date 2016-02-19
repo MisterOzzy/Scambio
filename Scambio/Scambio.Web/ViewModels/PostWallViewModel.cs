@@ -18,5 +18,6 @@ namespace Scambio.Web.ViewModels
         public string BodyPost { get; set; }
         public string PictureLocation { get; set; }
         public string AuthorAvatar { get; set; }
+        public string AuthorUsername { get; set; }
     }
 }

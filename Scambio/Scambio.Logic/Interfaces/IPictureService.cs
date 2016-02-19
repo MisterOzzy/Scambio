@@ -17,6 +17,7 @@ namespace Scambio.Logic.Interfaces
         Picture GetPicture(Guid id);
         string GetPictureLocation(string pictureStorage, Guid creator, Guid pictureId, string postfix = "");
         string GetPictureLocation(string pictureStorage, Guid creator, Picture picture, string postfix = "");
+        string GetOriginalAvatar(string croppedAvatar);
 
     }
 }

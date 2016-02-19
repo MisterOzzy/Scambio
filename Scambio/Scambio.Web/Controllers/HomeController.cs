@@ -44,6 +44,7 @@ namespace Scambio.Web.Controllers
             return View(userPageViewModel);
         }
 
+
         private UserPageViewModel GetUserPageViewModel(string userName)
         {
             var logginedUserId = HttpContext.User.Identity.GetUserId();
@@ -51,10 +52,15 @@ namespace Scambio.Web.Controllers
             var pictureStorage = ConfigurationManager.AppSettings["pictureStorage"];
 
             UserInfo logginedUserInfo = _userService.GetUser(new Guid(logginedUserId), pictureStorage);
+            logginedUserInfo.OriginalAvatarLocation = _pictureService.GetOriginalAvatar(logginedUserInfo.AvatarLocation);
+
             UserInfo currentUserInfo = null;
 
             if (userName != logginedUsername)
+            {
                 currentUserInfo = _userService.GetUser(userName, pictureStorage);
+                currentUserInfo.OriginalAvatarLocation = _pictureService.GetOriginalAvatar(currentUserInfo.AvatarLocation);
+            }         
             else
                 currentUserInfo = logginedUserInfo;
 
@@ -140,6 +146,7 @@ namespace Scambio.Web.Controllers
                     DateCreated = post.DateCreated,
                     FirstNameAuthor = post.Author.FirstName,
                     LastNameAuthor = post.Author.LastName,
+                    AuthorUsername = post.Author.UserName,
                     LikeCount = _postService.GetLikeCount(post.Id),
                     AuthorId = post.AuthorId.Value,
                     AuthorAvatar = GetUserAvatarLocation(post.Author)

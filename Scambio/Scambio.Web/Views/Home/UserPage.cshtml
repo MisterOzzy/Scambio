@@ -1,14 +1,16 @@
 ﻿@{
     Layout = "~/Views/Shared/_SignedLayout.cshtml";
     ViewBag.Title = $"{Model.CurrentUser.FirstName} {Model.CurrentUser.LastName}";
-    @model Scambio.Web.ViewModels.UserPageViewModel
+
 }
+@model Scambio.Web.ViewModels.UserPageViewModel
 
 <div class="modal fade " id="myModal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">People who liked this</h4>
             </div>
             <div class="modal-body" id="modalBodyLikes">
@@ -22,19 +24,20 @@
 </div>
 
 
-    <div class="main-container">
+<div class="main-container">
     <div class="wall" id="@Model.CurrentUser.Id">
         @if (Model.CurrentUser.Id != Model.LogginedUser.Id)
         {
             <div class="current-user">
-                
                 @if (!string.IsNullOrEmpty(Model.CurrentUser.AvatarLocation))
                 {
-                    <img src="@Model.CurrentUser.AvatarLocation" alt="ava" class="img-rounded current-user-avatar">
+                    <a class="fancybox" href="@Model.CurrentUser.OriginalAvatarLocation"><img src="@Model.CurrentUser.AvatarLocation" alt="ava" class="img-rounded current-user-avatar"></a>
                 }
                 else
                 {
-                    <img src="~/Content/Assets/no_avatar.png" alt="ava" class="img-rounded current-user-avatar">
+                    <a class="fancybox" href="~/Content/Assets/no_avatar.png">
+                        <img src="~/Content/Assets/no_avatar.png" alt="ava" class="img-rounded current-user-avatar">
+                    </a>
                 }
                 <span>@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</span>
             </div>
@@ -72,7 +75,7 @@
     <script>
 
         function bindBtnLike() {
-            $(".btn-like").click(function () {
+            $(".btn-like").click(function() {
                 var postId = $(this).parent().parent().parent().parent().attr('id');
                 var formData = new FormData();
                 formData.append("postId", postId);
@@ -84,12 +87,12 @@
                     dataType: 'json',
                     contentType: false,
                     processData: false,
-                    success: function (data) {
+                    success: function(data) {
                         thisBtn.parent().parent().find(".like-count").html(data);
                     },
 
 
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         alert(xhr.responseText);
                     }
                 });
@@ -98,7 +101,7 @@
         }
 
         function bindBtnDelete() {
-            $(".btn-delete-post-id").click(function () {
+            $(".btn-delete-post-id").click(function() {
                 var postId = $(this).parent().parent().parent().attr('id');
                 var authorId = $(this).parent().parent().find(".author-post").attr('id');
                 var wallId = $(".wall").attr('id');
@@ -114,17 +117,16 @@
                     dataType: 'json',
                     contentType: false,
                     processData: false,
-                    success: function (data) {
+                    success: function(data) {
                         if (data === "Deleted") {
                             thisBtn.parent().parent().parent().remove();
                         }
-                            
-                        
-                        
+
+
                     },
 
 
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         alert(xhr.responseText);
                     }
                 });
@@ -134,9 +136,9 @@
 
 
         function bindBtnLook() {
-            $(".look-btn").click(function () {
+            $(".look-btn").click(function() {
                 var postId = $(this).parent().parent().parent().parent().attr('id');
-               
+
                 var formData = new FormData();
                 formData.append("postId", postId);
                 var thisBtn = $(this);
@@ -147,12 +149,12 @@
                     dataType: 'html',
                     contentType: false,
                     processData: false,
-                    success: function (data) {
+                    success: function(data) {
                         $("#modalBodyLikes").html(data);
                     },
 
 
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         alert(xhr.responseText);
                     }
                 });
@@ -160,12 +162,12 @@
             });
         }
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             bindBtnDelete();
             bindBtnLike();
             bindBtnLook();
 
-            $("#btnSend").click(function () {
+            $("#btnSend").click(function() {
                 var formData = new FormData();
                 var wallId = $(".wall").attr('id');
                 formData.append("bodyPost", $("#tbBodyPost").val());
@@ -183,7 +185,7 @@
                     dataType: 'html',
                     contentType: false,
                     processData: false,
-                    success: function (data) {
+                    success: function(data) {
                         //Fill div with results
                         if (data !== "") {
                             $("#postdata").html(data);
@@ -197,14 +199,11 @@
 
 
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         alert(xhr.responseText);
                     }
                 });
             });
-
-
-
 
 
         });

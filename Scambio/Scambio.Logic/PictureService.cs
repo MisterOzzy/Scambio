@@ -65,5 +65,16 @@ namespace Scambio.Logic
             return Path.Combine(pictureStorage, creator.ToString(),
                 GeneratePictureFilename(picture.Id, picture.Secret, picture.Extension, postfix));
         }
+
+        public string GetOriginalAvatar(string croppedAvatar)
+        {
+            if (string.IsNullOrEmpty(croppedAvatar))
+                return string.Empty;
+
+            int posAva = croppedAvatar.IndexOf("_ava") + 4;
+            string extension = croppedAvatar.Substring(posAva, croppedAvatar.Length - posAva);
+            string filename = croppedAvatar.Substring(0, posAva - 4);
+            return filename + extension;
+        }
     }
 }
